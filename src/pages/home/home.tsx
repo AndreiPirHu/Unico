@@ -1,0 +1,101 @@
+import { Navbar } from "../../components/navbar";
+import { ProductList } from "./productList";
+
+export const Home = () => {
+  //TODO: create custom interface/type for data!
+  const mockData: Product[] = [
+    {
+      name: "Secret Garden Sweater",
+      price: 160,
+      description: "",
+      images: {
+        front: "/src/assets/Sakura-front.webp",
+        back: "/src/assets/Sakura-back.webp",
+      },
+    },
+    {
+      name: "Fine China Sherpa Fleece",
+      price: 160,
+      description: "",
+      images: {
+        front: "/src/assets/Sakura-front.webp",
+        back: "/src/assets/Sakura-back.webp",
+      },
+    },
+    {
+      name: "Hidden River Sweater",
+      price: 160,
+      description: "",
+      images: {
+        front: "/src/assets/Sakura-front.webp",
+        back: "/src/assets/Sakura-back.webp",
+      },
+    },
+    {
+      name: "Secret Garden Sweater",
+      price: 160,
+      description: "",
+      images: {
+        front: "/src/assets/Sakura-front.webp",
+        back: "/src/assets/Sakura-back.webp",
+      },
+    },
+    {
+      name: "Mille Fleurs Sweater",
+      price: 160,
+      description: "",
+      images: {
+        front: "/src/assets/Sakura-front.webp",
+        back: "/src/assets/Sakura-back.webp",
+      },
+    },
+    {
+      name: "Sakura Sweater",
+      price: 160,
+      description: "",
+      images: {
+        front: "/src/assets/Sakura-front.webp",
+        back: "/src/assets/Sakura-back.webp",
+      },
+    },
+    {
+      name: "Spring revival Jumper",
+      price: 160,
+      description: "",
+      images: {
+        front: "/src/assets/Sakura-front.webp",
+        back: "/src/assets/Sakura-back.webp",
+      },
+    },
+    {
+      name: "Verano en Tierra Sweater",
+      price: 160,
+      description: "",
+      images: {
+        front: "/src/assets/Sakura-front.webp",
+        back: "/src/assets/Sakura-back.webp",
+      },
+    },
+    {
+      name: "Botanical Sherpa Fleece",
+      price: 160,
+      description: "",
+      images: {
+        front: "/src/assets/Sakura-front.webp",
+        back: "/src/assets/Sakura-back.webp",
+      },
+    },
+  ];
+
+  return (
+    <div id="Home">
+      <Navbar />
+      <div id="hero">
+        <img src="/src/assets/hero-image.png" alt="" className=" w-full" />
+      </div>
+      <div>
+        <ProductList data={mockData} />
+      </div>
+    </div>
+  );
+};
