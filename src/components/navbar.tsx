@@ -24,7 +24,7 @@ export const Navbar = () => {
 
   return (
     <nav
-      className={` flex h-24 fixed w-screen transition-colors duration-500 font-light whitespace-nowrap ${
+      className={` flex h-24 z-50 fixed w-screen transition-colors duration-500 font-light whitespace-nowrap ${
         scrollPosition
           ? "bg-white text-gray-600 border-b border-#e2e2e2"
           : "bg-transparent text-white"

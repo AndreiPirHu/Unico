@@ -7,7 +7,7 @@ export const Home = () => {
     {
       name: "Secret Garden Sweater",
       price: 160,
-      description: "",
+      description: "Really cool embroidery sweater",
       images: {
         front: "/src/assets/Sakura-front.webp",
         back: "/src/assets/Sakura-back.webp",
@@ -16,7 +16,7 @@ export const Home = () => {
     {
       name: "Fine China Sherpa Fleece",
       price: 160,
-      description: "",
+      description: "Really cool embroidery sweater",
       images: {
         front: "/src/assets/Sakura-front.webp",
         back: "/src/assets/Sakura-back.webp",
@@ -25,7 +25,7 @@ export const Home = () => {
     {
       name: "Hidden River Sweater",
       price: 160,
-      description: "",
+      description: "Really cool embroidery sweater, gotta love it broski",
       images: {
         front: "/src/assets/Sakura-front.webp",
         back: "/src/assets/Sakura-back.webp",
