@@ -93,6 +93,16 @@ export const Home = () => {
       <div id="hero">
         <img src="/src/assets/hero-image.png" alt="" className=" w-full" />
       </div>
+      <div className=" grid justify-items-center my-4">
+        <h3>New Arrivals</h3>
+        <p className=" text-center text-xs w-2/4">
+          Elevate your style with our range of exquisite embroidered sweaters.
+          Each piece is adorned with unique embroidery, showcasing a blend of
+          artistry and comfort. Indulge in the luxury of premium materials such
+          as soft cotton and fine merino wool. Explore the entire assortment in
+          our latest arrivals and embrace the art of embroidered knitwear.
+        </p>
+      </div>
       <div>
         <ProductList data={mockData} />
       </div>

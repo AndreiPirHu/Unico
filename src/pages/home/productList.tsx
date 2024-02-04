@@ -11,13 +11,13 @@ export const ProductList: React.FC<productListProps> = ({ data }) => {
     setNodeList([]);
     for (let product of data) {
       let newItem: React.ReactNode = (
-        <div key={product.name} className=" relative cursor-pointer">
+        <div key={product.name} className=" relative cursor-pointer ">
           <img
             src={product.images.front}
             alt=""
             onMouseEnter={(e) => handleImgHoverOn(e, product.images.back)}
             onMouseLeave={(e) => handleImgHoverOut(e, product.images.front)}
-            className=" peer"
+            className=" peer "
           />
 
           <div className=" absolute origin-bottom scale-y-0 duration-500 peer-hover:scale-y-100 bottom-0.5 pointer-events-none w-auto ml-3 ">
