@@ -57,7 +57,7 @@ export const ProductList: React.FC<productListProps> = ({ data }) => {
   }, []);
 
   return (
-    <div className=" grid max-md:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-6 mx-4">
+    <div className=" grid max-md:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 mt-6 mx-4">
       {nodeList}
     </div>
   );

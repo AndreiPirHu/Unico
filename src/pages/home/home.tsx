@@ -88,13 +88,14 @@ export const Home = () => {
   ];
 
   return (
-    <div id="Home">
+    <div id="Home" className=" ">
       <Navbar />
       <div id="hero">
         <img src="/src/assets/hero-image.png" alt="" className=" w-full" />
       </div>
       <div className=" grid justify-items-center my-4">
         <h3>New Arrivals</h3>
+        <p className=" underline text-gray-700 text-sm  ">View all</p>
         <p className=" text-center text-xs w-2/4">
           Elevate your style with our range of exquisite embroidered sweaters.
           Each piece is adorned with unique embroidery, showcasing a blend of
@@ -105,6 +106,18 @@ export const Home = () => {
       </div>
       <div>
         <ProductList data={mockData} />
+      </div>
+      <div className="flex object-cover">
+        <img
+          src="/src/assets/home-promo-image.png"
+          alt=""
+          className=" flex-1"
+        />
+        <img
+          src="/src/assets/home-promo-image-2.png"
+          alt=""
+          className=" flex-1"
+        />
       </div>
     </div>
   );

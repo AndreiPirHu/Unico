@@ -129,9 +129,9 @@ export const Navbar = () => {
         onMouseEnter={handleHoverOn}
         onMouseLeave={handleHoverOff}
       >
-        <div className=" flex flex-1">
+        <div className=" flex flex-1 ">
           <div className="grid m-auto">
-            <h6>Categories</h6>
+            <h5 className=" font-bold">Categories</h5>
             <ul>
               <li>New Arrivals</li>
               <li>Shop All</li>
@@ -142,7 +142,7 @@ export const Navbar = () => {
             </ul>
           </div>
         </div>
-        <div className="flex flex-1 bg-cover bg-center bg-[linear-gradient(to_right,rgba(255,255,255,1),rgba(255,255,255,0.5),rgba(255,255,255,0.0),rgba(255,255,255,0)),url('../src/assets/navbar-shop-image.jpeg')]"></div>
+        <div className="flex flex-1 bg-no-repeat bg-cover bg-center bg-[linear-gradient(to_right,rgba(255,255,255,1),rgba(255,255,255,0.5),rgba(255,255,255,0.0),rgba(255,255,255,0)),url('../src/assets/navbar-shop-image.jpeg')]"></div>
       </div>
     </nav>
   );
