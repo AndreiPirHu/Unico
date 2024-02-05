@@ -1,3 +1,4 @@
+import { Footer } from "../../components/footer";
 import { Navbar } from "../../components/navbar";
 import { ProductList } from "./productList";
 
@@ -88,7 +89,7 @@ export const Home = () => {
   ];
 
   return (
-    <div id="Home" className=" ">
+    <div id="Home" className="overflow-hidden ">
       <Navbar />
       <div id="hero">
         <img src="/src/assets/hero-image.png" alt="" className=" w-full" />
@@ -107,18 +108,23 @@ export const Home = () => {
       <div>
         <ProductList data={mockData} />
       </div>
-      <div className="flex object-cover">
-        <img
-          src="/src/assets/home-promo-image.png"
-          alt=""
-          className=" flex-1"
-        />
-        <img
-          src="/src/assets/home-promo-image-2.png"
-          alt=""
-          className=" flex-1"
-        />
+      <div className="flex max-h-[760px] mt-9 max-sm:max-h-[400px]">
+        <div className=" flex-1 ">
+          <img
+            src="/src/assets/home-promo-image.png"
+            alt=""
+            className=" object-cover h-full w-full"
+          />
+        </div>
+        <div className="flex-1 max-sm:hidden ">
+          <img
+            src="/src/assets/home-promo-image-2.png"
+            alt=""
+            className=" object-cover h-full w-full "
+          />
+        </div>
       </div>
+      <Footer />
     </div>
   );
 };
