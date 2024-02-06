@@ -36,9 +36,9 @@ export const Navbar = () => {
   }, []);
 
   return (
-    <nav>
+    <nav className=" montserrat-regular">
       <div
-        className={` flex h-24 z-50 fixed w-screen transition-colors duration-200 font-light whitespace-nowrap ${
+        className={` flex h-24 z-50 fixed w-screen transition-colors duration-200  text-sm font-light whitespace-nowrap ${
           scrollPosition || hovered
             ? "bg-white text-gray-600 border-b border-#e2e2e2"
             : "bg-transparent text-white"
@@ -80,7 +80,7 @@ export const Navbar = () => {
           <img src="/src/assets/react.svg" alt="" className=" h-10" />
         </div>
         <div className="flex flex-1 justify-end my-auto mr-20 ">
-          <a href="" className={`group mr-5 `}>
+          <a href="" className={`group mr-5  my-auto`}>
             Account
             <span
               className={`block h-0.5 ${
@@ -123,22 +123,22 @@ export const Navbar = () => {
       </div>
 
       <div
-        className={` flex top-24 h-72 z-50 fixed w-screen font-light whitespace-nowrap scale-y-0 duration-200 origin-top bg-white text-gray-600 border-b border-#e2e2e2 ${
+        className={` flex top-24 h-72 z-50 fixed w-screen montserrat-regular font-light whitespace-nowrap scale-y-0 duration-200 origin-top bg-white text-gray-600 border-b border-#e2e2e2 ${
           hovered ? "scale-y-100 " : ""
         }`}
         onMouseEnter={handleHoverOn}
         onMouseLeave={handleHoverOff}
       >
         <div className=" flex flex-1 ">
-          <div className="grid m-auto">
-            <h5 className=" font-bold">Categories</h5>
+          <div className="grid my-auto ml-auto mr-28">
+            <h3 className=" text-base mb-4 text-gray-400">Categories</h3>
             <ul>
-              <li>New Arrivals</li>
-              <li>Shop All</li>
-              <li>Embroidered Tops</li>
-              <li>4</li>
-              <li>5</li>
-              <li>6</li>
+              <li className="text-sm mb-1">New Arrivals</li>
+              <li className="text-sm mb-1">Shop All</li>
+              <li className="text-sm mb-1">Embroidered Tops</li>
+              <li className="text-sm mb-1">4</li>
+              <li className="text-sm mb-1">5</li>
+              <li className="text-sm mb-1">6</li>
             </ul>
           </div>
         </div>

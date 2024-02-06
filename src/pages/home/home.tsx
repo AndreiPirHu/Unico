@@ -94,8 +94,8 @@ export const Home = () => {
       <div id="hero">
         <img src="/src/assets/hero-image.png" alt="" className=" w-full" />
       </div>
-      <div className=" grid justify-items-center my-4">
-        <h3>New Arrivals</h3>
+      <div className=" grid justify-items-center my-4 montserrat-regular">
+        <h3 className=" text-base">New Arrivals</h3>
         <p className=" underline text-gray-700 text-sm  ">View all</p>
         <p className=" text-center text-xs w-2/4">
           Elevate your style with our range of exquisite embroidered sweaters.
@@ -120,7 +120,7 @@ export const Home = () => {
           <img
             src="/src/assets/home-promo-image-2.png"
             alt=""
-            className=" object-cover h-full w-full "
+            className=" object-cover h-full w-full border-t "
           />
         </div>
       </div>

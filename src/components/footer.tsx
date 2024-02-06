@@ -13,13 +13,13 @@ export const Footer = () => {
           Our products will always be progressive and accessible.
         </p>
         <div className="flex">
-          <div className=" h-7 w-7 mr-3">
+          <div className=" h-7 w-7 mr-3 cursor-pointer hover:opacity-65">
             <img src="/src/assets/socials-fb-icon.svg" alt="" />
           </div>
-          <div className=" h-7 w-7 mr-3">
+          <div className=" h-7 w-7 mr-3 cursor-pointer hover:opacity-65">
             <img src="/src/assets/socials-ig-icon.svg" alt="" />
           </div>
-          <div className=" h-7 w-7 mr-3">
+          <div className=" h-7 w-7 mr-3 cursor-pointer hover:opacity-65">
             <img src="/src/assets/socials-tt-icon.svg" alt="" />
           </div>
         </div>
