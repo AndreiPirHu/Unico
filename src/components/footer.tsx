@@ -28,17 +28,29 @@ export const Footer = () => {
       <div className=" whitespace-nowrap">
         <h3 className="mb-7 text-sm max-md:mb-3">Connect</h3>
         <ul className=" text-xs">
-          <li className=" mb-2">Contact Us</li>
-          <li className=" mb-2">Careers</li>
-          <li className=" mb-2">Customer Service</li>
+          <li className=" mb-2 hover:opacity-65">
+            <a href="">Contact Us</a>
+          </li>
+          <li className=" mb-2 hover:opacity-65">
+            <a href="">Careers</a>
+          </li>
+          <li className=" mb-2 hover:opacity-65">
+            <a href="">Customer Service</a>
+          </li>
         </ul>
       </div>
       <div className=" whitespace-nowrap">
         <h3 className="mb-7 text-sm max-md:mb-3">Company</h3>
         <ul className="text-xs">
-          <li className=" mb-2">About us</li>
-          <li className=" mb-2">Sustainability</li>
-          <li className=" mb-2">Returns & Exchanges</li>
+          <li className=" mb-2 hover:opacity-65">
+            <a href="">About us</a>
+          </li>
+          <li className=" mb-2 hover:opacity-65">
+            <a href="">Sustainability</a>
+          </li>
+          <li className=" mb-2 hover:opacity-65">
+            <a href="">Returns & Exchanges</a>
+          </li>
         </ul>
       </div>
       <div>

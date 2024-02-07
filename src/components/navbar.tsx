@@ -1,8 +1,10 @@
 import { useEffect, useRef, useState } from "react";
+import { SearchBar } from "./searchBar";
 
 export const Navbar = () => {
   const [scrollPosition, setScrollPosition] = useState<boolean>(false);
   const [hovered, setHovered] = useState<boolean>(false);
+  const [searchBarActive, setSearchBarActive] = useState<boolean>(false);
   let hoverTimeout = useRef<number | null>(null);
 
   const handleScroll = () => {
@@ -37,8 +39,13 @@ export const Navbar = () => {
 
   return (
     <nav className=" montserrat-regular">
+      <SearchBar
+        setSearchBarActive={setSearchBarActive}
+        searchBarActive={searchBarActive}
+      />
+
       <div
-        className={` flex h-24 z-50 fixed w-screen transition-colors duration-200  text-sm font-light whitespace-nowrap ${
+        className={` flex h-24 z-40 fixed w-screen transition-colors duration-200  text-sm font-light whitespace-nowrap ${
           scrollPosition || hovered
             ? "bg-white text-gray-600 border-b border-#e2e2e2"
             : "bg-transparent text-white"
@@ -88,8 +95,10 @@ export const Navbar = () => {
               }   scale-x-0 duration-500 group-hover:scale-x-100`}
             ></span>
           </a>
-
-          <a href="" className={`group mr-5 `}>
+          <div
+            className={`group mr-5 cursor-pointer`}
+            onClick={() => setSearchBarActive(true)}
+          >
             Search
             <img
               src="/src/assets/search-icon.svg"
@@ -103,7 +112,8 @@ export const Navbar = () => {
                 scrollPosition || hovered ? " bg-gray-600" : "bg-white "
               }   scale-x-0 duration-500 group-hover:scale-x-100`}
             ></span>
-          </a>
+          </div>
+
           <a href="" className={`group mr-5 `}>
             Cart
             <img
@@ -133,12 +143,24 @@ export const Navbar = () => {
           <div className="grid my-auto ml-auto mr-28">
             <h3 className=" text-base mb-4 text-gray-400">Categories</h3>
             <ul>
-              <li className="text-sm mb-1">New Arrivals</li>
-              <li className="text-sm mb-1">Shop All</li>
-              <li className="text-sm mb-1">Embroidered Tops</li>
-              <li className="text-sm mb-1">4</li>
-              <li className="text-sm mb-1">5</li>
-              <li className="text-sm mb-1">6</li>
+              <li className="text-sm mb-1 hover:opacity-65">
+                <a href="">New Arrivals</a>
+              </li>
+              <li className="text-sm mb-1 hover:opacity-65">
+                <a href="">Shop All</a>
+              </li>
+              <li className="text-sm mb-1 hover:opacity-65">
+                <a href="">Embroidered Tops</a>
+              </li>
+              <li className="text-sm mb-1 hover:opacity-65">
+                <a href="">4</a>
+              </li>
+              <li className="text-sm mb-1 hover:opacity-65">
+                <a href="">5</a>
+              </li>
+              <li className="text-sm mb-1 hover:opacity-65">
+                <a href="">6</a>
+              </li>
             </ul>
           </div>
         </div>

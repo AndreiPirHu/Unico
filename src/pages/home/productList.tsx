@@ -22,9 +22,8 @@ export const ProductList: React.FC<productListProps> = ({ data }) => {
 
           <div className=" absolute origin-bottom scale-y-0 duration-500 peer-hover:scale-y-100 bottom-0.5 pointer-events-none w-auto ml-3 ">
             <h3 className="karantina-light text-4xl">{product.name}</h3>
-            <p className=" inline-block">€</p>
+            <p className=" inline-block text-xl">€</p>
             <p className="karantina-light inline-block ml-1 text-3xl ">
-              {" "}
               {product.price}
             </p>
           </div>
@@ -57,7 +56,7 @@ export const ProductList: React.FC<productListProps> = ({ data }) => {
   }, []);
 
   return (
-    <div className=" grid max-md:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-8 mt-6 mx-4">
+    <div className=" grid max-md:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 mt-6 mx-4">
       {nodeList}
     </div>
   );
