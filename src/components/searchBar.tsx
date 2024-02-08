@@ -16,7 +16,7 @@ export const SearchBar: React.FC<searchBarProps> = ({
 
   return (
     <search
-      className={`grid fixed z-50 w-full h-full transition-all duration-300  ${
+      className={`grid fixed z-50 w-full h-full transition-all duration-200  ${
         searchBarActive
           ? "opacity-100 visible pointer-events-auto"
           : "invisible pointer-events-none opacity-0  "

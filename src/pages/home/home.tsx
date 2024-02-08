@@ -1,96 +1,18 @@
+import { useSelector } from "react-redux";
 import { Footer } from "../../components/footer";
 import { Navbar } from "../../components/navbar";
 import { ProductList } from "./productList";
+import { RootState } from "../../features/rootReducer";
 
 export const Home = () => {
-  //TODO: create custom interface/type for data!
-  const mockData: Product[] = [
-    {
-      name: "Secret Garden Sweater",
-      price: 160,
-      description: "Really cool embroidery sweater",
-      images: {
-        front: "/src/assets/Sakura-front.webp",
-        back: "/src/assets/Sakura-back.webp",
-      },
-    },
-    {
-      name: "Fine China Sherpa Fleece",
-      price: 160,
-      description: "Really cool embroidery sweater",
-      images: {
-        front: "/src/assets/Sakura-front.webp",
-        back: "/src/assets/Sakura-back.webp",
-      },
-    },
-    {
-      name: "Hidden River Sweater",
-      price: 160,
-      description: "Really cool embroidery sweater, gotta love it broski",
-      images: {
-        front: "/src/assets/Sakura-front.webp",
-        back: "/src/assets/Sakura-back.webp",
-      },
-    },
-    {
-      name: "Secret Garden Sweater",
-      price: 160,
-      description: "",
-      images: {
-        front: "/src/assets/Sakura-front.webp",
-        back: "/src/assets/Sakura-back.webp",
-      },
-    },
-    {
-      name: "Mille Fleurs Sweater",
-      price: 160,
-      description: "",
-      images: {
-        front: "/src/assets/Sakura-front.webp",
-        back: "/src/assets/Sakura-back.webp",
-      },
-    },
-    {
-      name: "Sakura Sweater",
-      price: 160,
-      description: "",
-      images: {
-        front: "/src/assets/Sakura-front.webp",
-        back: "/src/assets/Sakura-back.webp",
-      },
-    },
-    {
-      name: "Spring revival Jumper",
-      price: 160,
-      description: "",
-      images: {
-        front: "/src/assets/Sakura-front.webp",
-        back: "/src/assets/Sakura-back.webp",
-      },
-    },
-    {
-      name: "Verano en Tierra Sweater",
-      price: 160,
-      description: "",
-      images: {
-        front: "/src/assets/Sakura-front.webp",
-        back: "/src/assets/Sakura-back.webp",
-      },
-    },
-    {
-      name: "Botanical Sherpa Fleece",
-      price: 160,
-      description: "",
-      images: {
-        front: "/src/assets/Sakura-front.webp",
-        back: "/src/assets/Sakura-back.webp",
-      },
-    },
-  ];
+  let productsFromRedux: Products = useSelector(
+    (state: RootState) => state.products
+  );
 
   return (
     <div id="Home" className="overflow-hidden ">
       <Navbar />
+
       <div id="hero">
         <img src="/src/assets/hero-image.png" alt="" className=" w-full" />
       </div>
@@ -106,7 +28,7 @@ export const Home = () => {
         </p>
       </div>
       <div>
-        <ProductList data={mockData} />
+        <ProductList data={productsFromRedux.products} />
       </div>
       <div className="flex max-h-[760px] mt-9 max-sm:max-h-[400px]">
         <div className=" flex-1 ">
