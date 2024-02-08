@@ -43,7 +43,6 @@ export const Navbar = () => {
         setSearchBarActive={setSearchBarActive}
         searchBarActive={searchBarActive}
       />
-
       <div
         className={` flex h-24 z-40 fixed w-screen transition-colors duration-200  text-sm font-light whitespace-nowrap ${
           scrollPosition || hovered
@@ -51,10 +50,25 @@ export const Navbar = () => {
             : "bg-transparent text-white"
         }  `}
       >
-        <div className=" flex flex-1  my-auto ml-20">
+        <div className=" flex flex-1  my-auto ml-10 max-md:ml-5">
+          <img
+            src="/src/assets/hamburger-icon.svg"
+            alt="three black horizontal lines"
+            className={` inline cursor-pointer h-11 p-2 md:hidden  ${
+              scrollPosition || hovered ? "" : "invert "
+            }`}
+          />
+          <img
+            src="/src/assets/search-icon.svg"
+            alt=""
+            className={` inline cursor-pointer h-11 p-2  md:hidden ${
+              scrollPosition || hovered ? "" : "invert "
+            }`}
+            onClick={() => setSearchBarActive(true)}
+          />
           <a
             href=""
-            className={` group ml-5 `}
+            className={` group ml-5 max-md:hidden`}
             onMouseEnter={handleHoverOn}
             onMouseLeave={handleHoverOff}
           >
@@ -66,7 +80,7 @@ export const Navbar = () => {
             ></span>
           </a>
 
-          <a href="" className={`group ml-5 `}>
+          <a href="" className={`group ml-5 max-md:hidden `}>
             Journal
             <span
               className={`block h-0.5 ${
@@ -74,7 +88,7 @@ export const Navbar = () => {
               }   scale-x-0 duration-500 group-hover:scale-x-100`}
             ></span>
           </a>
-          <a href="" className={`group ml-5  `}>
+          <a href="" className={`group ml-5 max-md:hidden `}>
             About
             <span
               className={`block h-0.5 ${
@@ -86,8 +100,23 @@ export const Navbar = () => {
         <div className=" flex flex-1 justify-center my-auto">
           <img src="/src/assets/react.svg" alt="" className=" h-10" />
         </div>
-        <div className="flex flex-1 justify-end my-auto mr-20 ">
-          <a href="" className={`group mr-5  my-auto`}>
+        <div className="flex flex-1 justify-end my-auto mr-10 max-md:mr-5 ">
+          <img
+            src="/src/assets/account-icon.svg"
+            alt=""
+            className={` inline cursor-pointer h-11 p-2  md:hidden ${
+              scrollPosition || hovered ? "" : "invert "
+            }`}
+          />
+
+          <img
+            src="/src/assets/basket-icon.svg"
+            alt=""
+            className={` inline cursor-pointer h-11 p-2 md:hidden ${
+              scrollPosition || hovered ? "" : "invert "
+            }`}
+          />
+          <a href="" className={`group mr-5  my-auto max-md:hidden `}>
             Account
             <span
               className={`block h-0.5 ${
@@ -96,14 +125,14 @@ export const Navbar = () => {
             ></span>
           </a>
           <div
-            className={`group mr-5 cursor-pointer`}
+            className={`group mr-5 cursor-pointer max-md:hidden`}
             onClick={() => setSearchBarActive(true)}
           >
             Search
             <img
               src="/src/assets/search-icon.svg"
               alt=""
-              className={` inline h-6 ml-1 ${
+              className={` inline h-4 ml-1  ${
                 scrollPosition || hovered ? "" : "invert "
               }`}
             />
@@ -114,12 +143,12 @@ export const Navbar = () => {
             ></span>
           </div>
 
-          <a href="" className={`group mr-5 `}>
+          <a href="" className={`group mr-5 max-md:hidden`}>
             Cart
             <img
               src="/src/assets/basket-icon.svg"
               alt=""
-              className={` inline h-6 ml-1  ${
+              className={` inline h-4 ml-1  ${
                 scrollPosition || hovered ? "" : "invert"
               }`}
             />
