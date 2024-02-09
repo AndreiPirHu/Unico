@@ -1,5 +1,4 @@
 import React from "react";
-import { ProductList } from "../../pages/home/productList";
 
 type searchBarProps = {
   searchBarActive: boolean;

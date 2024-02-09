@@ -14,7 +14,22 @@ export const Home = () => {
       <Navbar />
 
       <div id="hero">
-        <img src="/src/assets/hero-image.png" alt="" className=" w-full" />
+        <picture>
+          <source
+            media="(max-width:640px)"
+            srcSet="/src/assets/hero-image-small.webp"
+          />
+          <source
+            media="(min-width:641px)"
+            //Change src to /src/assets/hero-image.png if it stops working
+            srcSet="https://www.yitai.la/cdn/shop/files/Frame_357.jpg?v=1651694659"
+          />
+          <img
+            src="/src/assets/hero-image.png"
+            alt=""
+            className=" w-full max-md:h-screen max-md:object-cover max-sm:h-[100vh] object-top"
+          />
+        </picture>
       </div>
       <div className=" grid justify-items-center my-4 montserrat-regular">
         <h3 className=" text-base">New Arrivals</h3>

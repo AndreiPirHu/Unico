@@ -1,10 +1,12 @@
 import { useEffect, useRef, useState } from "react";
 import { SearchBar } from "./searchBar";
+import { SideMenu } from "./sideMenu";
 
 export const Navbar = () => {
   const [scrollPosition, setScrollPosition] = useState<boolean>(false);
   const [hovered, setHovered] = useState<boolean>(false);
   const [searchBarActive, setSearchBarActive] = useState<boolean>(false);
+  const [sideMenuActive, setSideMenuActive] = useState<boolean>(false);
   let hoverTimeout = useRef<number | null>(null);
 
   const handleScroll = () => {
@@ -39,6 +41,10 @@ export const Navbar = () => {
 
   return (
     <nav className=" montserrat-regular">
+      <SideMenu
+        setSideMenuActive={setSideMenuActive}
+        sideMenuActive={sideMenuActive}
+      />
       <SearchBar
         setSearchBarActive={setSearchBarActive}
         searchBarActive={searchBarActive}
@@ -57,6 +63,7 @@ export const Navbar = () => {
             className={` inline cursor-pointer h-11 p-2 md:hidden  ${
               scrollPosition || hovered ? "" : "invert "
             }`}
+            onClick={() => setSideMenuActive(!sideMenuActive)}
           />
           <img
             src="/src/assets/search-icon.svg"
@@ -66,11 +73,11 @@ export const Navbar = () => {
             }`}
             onClick={() => setSearchBarActive(true)}
           />
-          <a
-            href=""
-            className={` group ml-5 max-md:hidden`}
+          <div
+            className={` group ml-5 max-md:hidden cursor-pointer`}
             onMouseEnter={handleHoverOn}
             onMouseLeave={handleHoverOff}
+            onClick={() => setHovered(!hovered)}
           >
             Shop
             <span
@@ -78,7 +85,7 @@ export const Navbar = () => {
                 scrollPosition || hovered ? " bg-gray-600" : "bg-white "
               }   scale-x-0 duration-500 group-hover:scale-x-100`}
             ></span>
-          </a>
+          </div>
 
           <a href="" className={`group ml-5 max-md:hidden `}>
             Journal
@@ -98,7 +105,13 @@ export const Navbar = () => {
           </a>
         </div>
         <div className=" flex flex-1 justify-center my-auto">
-          <img src="/src/assets/react.svg" alt="" className=" h-10" />
+          <img
+            src="/src/assets/logo-icon.svg"
+            alt=""
+            className={`  cursor-pointer h-10 ${
+              scrollPosition || hovered ? "" : "invert "
+            }`}
+          />
         </div>
         <div className="flex flex-1 justify-end my-auto mr-10 max-md:mr-5 ">
           <img
@@ -169,25 +182,25 @@ export const Navbar = () => {
         onMouseLeave={handleHoverOff}
       >
         <div className=" flex flex-1 ">
-          <div className="grid my-auto ml-auto mr-28">
-            <h3 className=" text-base mb-4 text-gray-400">Categories</h3>
+          <div className="grid my-auto mx-auto">
+            <h3 className=" text-lg mb-4 text-gray-400">Categories</h3>
             <ul>
-              <li className="text-sm mb-1 hover:opacity-65">
+              <li className="text-base mb-1 hover:opacity-65">
                 <a href="">New Arrivals</a>
               </li>
-              <li className="text-sm mb-1 hover:opacity-65">
+              <li className="text-base mb-1 hover:opacity-65">
                 <a href="">Shop All</a>
               </li>
-              <li className="text-sm mb-1 hover:opacity-65">
+              <li className="text-base mb-1 hover:opacity-65">
                 <a href="">Embroidered Tops</a>
               </li>
-              <li className="text-sm mb-1 hover:opacity-65">
+              <li className="text-base mb-1 hover:opacity-65">
                 <a href="">4</a>
               </li>
-              <li className="text-sm mb-1 hover:opacity-65">
+              <li className="text-base mb-1 hover:opacity-65">
                 <a href="">5</a>
               </li>
-              <li className="text-sm mb-1 hover:opacity-65">
+              <li className="text-base mb-1 hover:opacity-65">
                 <a href="">6</a>
               </li>
             </ul>
