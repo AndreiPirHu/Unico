@@ -33,7 +33,7 @@ export const Products = () => {
             <img
               src={pictureUrl}
               alt="picture of clothing product"
-              className=" min-w-[86px]  cursor-pointer"
+              className=" h-32 min-w-[86px]  cursor-pointer"
               onClick={() => changeImage(pictureUrl)}
             />
             <span

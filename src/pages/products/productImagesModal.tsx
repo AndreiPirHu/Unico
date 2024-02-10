@@ -36,14 +36,17 @@ export const ProductImagesModal: React.FC<ProductImagesModalProps> = ({
         className="z-50 h-20 fixed right-0 p-3 cursor-pointer "
         onClick={() => setProductImagesModalActive(false)}
       />
-      <div className=" overflow-auto " ref={imageRef}>
+      <div
+        className={`  ${imageZoomed ? "overflow-auto" : "overflow-hidden"}`}
+        ref={imageRef}
+      >
         <img
           src={selectedImage}
           alt="picture of clothing product"
-          className={`h-[600px] origin-top-left    ${
+          className={`max-h-[600px] origin-top-left    ${
             imageZoomed
               ? " cursor-zoom-out scale-[2.5] h-[800px] "
-              : " cursor-zoom-in"
+              : " cursor-zoom-in "
           }
 
          `}
