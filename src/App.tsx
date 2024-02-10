@@ -6,6 +6,7 @@ import { useDispatch } from "react-redux";
 import { actions } from "./features/products";
 import { getFirestoreProducts } from "./components/getFirestoreProducts";
 import { useEffect } from "react";
+import { Products } from "./pages/products/products";
 
 function App() {
   const dispatch = useDispatch();
@@ -28,7 +29,8 @@ function App() {
     <>
       <Router>
         <Routes>
-          <Route path="/" element={<Home />}></Route>
+          <Route path="/" element={<Home />} />
+          <Route path="/products/:id" element={<Products />} />
         </Routes>
       </Router>
     </>

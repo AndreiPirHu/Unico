@@ -16,6 +16,7 @@ export const getFirestoreProducts = async () => {
       type: data.type,
       description: data.description,
       images: data.images,
+      imagesAll: data.imagesAll,
     };
     firestoreProducts.push(product);
   });

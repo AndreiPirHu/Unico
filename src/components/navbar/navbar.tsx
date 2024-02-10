@@ -1,8 +1,12 @@
-import { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { SearchBar } from "./searchBar";
 import { SideMenu } from "./sideMenu";
 
-export const Navbar = () => {
+type navbarProps = {
+  solidBg: boolean;
+};
+
+export const Navbar: React.FC<navbarProps> = ({ solidBg }) => {
   const [scrollPosition, setScrollPosition] = useState<boolean>(false);
   const [hovered, setHovered] = useState<boolean>(false);
   const [searchBarActive, setSearchBarActive] = useState<boolean>(false);
@@ -31,16 +35,20 @@ export const Navbar = () => {
   };
 
   useEffect(() => {
-    //change background color when scrolling
-    window.addEventListener("scroll", handleScroll);
+    if (solidBg) {
+      setScrollPosition(true);
+    } else {
+      //change background color when scrolling
+      window.addEventListener("scroll", handleScroll);
 
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
+      return () => {
+        window.removeEventListener("scroll", handleScroll);
+      };
+    }
   }, []);
 
   return (
-    <nav className=" montserrat-regular">
+    <nav className={`montserrat-regular ${solidBg ? "pb-24" : ""}`}>
       <SideMenu
         setSideMenuActive={setSideMenuActive}
         sideMenuActive={sideMenuActive}
@@ -105,13 +113,15 @@ export const Navbar = () => {
           </a>
         </div>
         <div className=" flex flex-1 justify-center my-auto">
-          <img
-            src="/src/assets/logo-icon.svg"
-            alt=""
-            className={`  cursor-pointer h-10 ${
-              scrollPosition || hovered ? "" : "invert "
-            }`}
-          />
+          <a href="/">
+            <img
+              src="/src/assets/logo-icon.svg"
+              alt=""
+              className={`  cursor-pointer h-10 ${
+                scrollPosition || hovered ? "" : "invert "
+              }`}
+            />
+          </a>
         </div>
         <div className="flex flex-1 justify-end my-auto mr-10 max-md:mr-5 ">
           <img

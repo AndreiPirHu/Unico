@@ -10,8 +10,8 @@ export const Home = () => {
   );
 
   return (
-    <div id="Home" className="overflow-hidden ">
-      <Navbar />
+    <div id="Home" className="overflow-hidden">
+      <Navbar solidBg={false} />
 
       <div id="hero">
         <picture>

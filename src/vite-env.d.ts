@@ -6,6 +6,7 @@ type Product = {
   type: string;
   description: string;
   images: { front: string; back: string };
+  imagesAll: string[];
 };
 
 type Products = {

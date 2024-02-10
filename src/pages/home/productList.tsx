@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 type productListProps = {
   data: Product[];
@@ -6,12 +7,17 @@ type productListProps = {
 
 export const ProductList: React.FC<productListProps> = ({ data }) => {
   const [nodeList, setNodeList] = useState<React.ReactNode>([]);
+  const navigate = useNavigate();
 
   const createNodeList = () => {
     setNodeList([]);
     for (let product of data) {
       let newItem: React.ReactNode = (
-        <div key={product.name} className=" relative cursor-pointer ">
+        <div
+          key={product.name}
+          className=" relative cursor-pointer "
+          onClick={() => navigateToProductPage(product.name)}
+        >
           <img
             src={product.images.front}
             alt=""
@@ -33,6 +39,11 @@ export const ProductList: React.FC<productListProps> = ({ data }) => {
         return [prevState, newItem];
       });
     }
+  };
+
+  const navigateToProductPage = (title: string) => {
+    const destination: string = `/products/${title}`;
+    navigate(destination);
   };
 
   const handleImgHoverOn = (
