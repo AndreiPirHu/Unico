@@ -3,7 +3,7 @@ import { Footer } from "../../components/footer";
 import { Navbar } from "../../components/navbar/navbar";
 import { useSelector } from "react-redux";
 import { RootState } from "../../features/rootReducer";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { ProductImagesModal } from "./productImagesModal";
 import { SiteLoader } from "../../components/siteLoader";
 
@@ -17,10 +17,13 @@ export const Products = () => {
   );
   const [ProductImagesModalActive, setProductImagesModalActive] =
     useState<boolean>(false);
+  const [chosenSize, setChosenSize] = useState<string>();
+  const [chosenQuantity, setChosenQuantity] = useState<number>(1);
+  const [cartButtonValue, setCartButtonValue] = useState<string>("Add to Cart");
   const getCurrentProduct = () => {
     setCurrentProduct(products.products.find((product) => product.name == id));
   };
-
+  let hoverTimeout = useRef<number | null>(null);
   const changeImage = (imageUrl: string | undefined) => {
     setSelectedImage(imageUrl);
   };
@@ -49,6 +52,20 @@ export const Products = () => {
         });
       }
     }
+  };
+
+  const handleSizeNotChosenEnter = () => {
+    if (!chosenSize) {
+      setCartButtonValue("Please Select a Size");
+      if (hoverTimeout.current !== null) {
+        clearTimeout(hoverTimeout.current);
+      }
+    }
+  };
+  const handleSizeNotChosenLeave = () => {
+    hoverTimeout.current = window.setTimeout(() => {
+      setCartButtonValue("Add to Cart");
+    }, 1000);
   };
 
   useEffect(() => {
@@ -86,7 +103,7 @@ export const Products = () => {
       )}
 
       <Navbar solidBg={true} />
-      <div className="grid grid-cols-2  mt-16">
+      <div className="grid grid-cols-2 mt-16 px-5">
         <div className="grid justify-center">
           <img
             src={selectedImage}
@@ -98,11 +115,72 @@ export const Products = () => {
           />
           <div className="flex gap-2 my-5">{picturesNodeList}</div>
         </div>
-        <div>
+        <div className="pl-10">
           <div className="montserrat-regular">
             <h1 className=" text-2xl ">{currentProduct?.name}</h1>
             <h2 className=" text-xl my-1">€{currentProduct?.price}</h2>
             <span className=" block h-0.5 bg-gray-400 my-5  "></span>
+            <h3 className="text-sm montserrat-bold">Size</h3>
+            <div className=" flex gap-2 my-3">
+              <button
+                className={`w-10 h-10 rounded-sm border hover:border-gray-800 text-sm ${
+                  chosenSize == "XS" ? "border-gray-800" : " "
+                }`}
+                onClick={() => setChosenSize("XS")}
+              >
+                XS
+              </button>
+              <button
+                className={`w-10 h-10 rounded-sm border hover:border-gray-800 text-sm ${
+                  chosenSize == "S" ? "border-gray-800" : " "
+                }`}
+                onClick={() => setChosenSize("S")}
+              >
+                S
+              </button>
+              <button
+                className={`w-10 h-10 rounded-sm border hover:border-gray-800 text-sm ${
+                  chosenSize == "M" ? "border-gray-800" : " "
+                }`}
+                onClick={() => setChosenSize("M")}
+              >
+                M
+              </button>
+              <button
+                className={`w-10 h-10 rounded-sm border hover:border-gray-800 text-sm ${
+                  chosenSize == "L" ? "border-gray-800" : " "
+                }`}
+                onClick={() => setChosenSize("L")}
+              >
+                L
+              </button>
+              <button
+                className={`w-10 h-10 rounded-sm  border hover:border-gray-800 text-sm ${
+                  chosenSize == "XL" ? "border-gray-800" : " "
+                }`}
+                onClick={() => setChosenSize("XL")}
+              >
+                XL
+              </button>
+            </div>
+
+            <h3 className="text-sm montserrat-bold">Quantity</h3>
+            <div className="flex">
+              <button>
+                <img src="/src/assets/minus-icon.svg" alt="" className="h-10" />
+              </button>
+              <h3>{chosenQuantity}</h3>
+              <button>
+                <img src="/src/assets/plus-icon.svg" alt="" className="h-10" />
+              </button>
+            </div>
+            <button
+              className=" w-full h-14 my-10 bg-white text-base border border-gray-800 rounded-sm hover:invert  "
+              onMouseEnter={handleSizeNotChosenEnter}
+              onMouseLeave={handleSizeNotChosenLeave}
+            >
+              {cartButtonValue}
+            </button>
           </div>
         </div>
       </div>
