@@ -5,6 +5,7 @@ import { useSelector } from "react-redux";
 import { RootState } from "../../features/rootReducer";
 import React, { useEffect, useState } from "react";
 import { ProductImagesModal } from "./productImagesModal";
+import { SiteLoader } from "../../components/siteLoader";
 
 export const Products = () => {
   const { id } = useParams<{ id: string }>();
@@ -72,6 +73,7 @@ export const Products = () => {
 
   return (
     <div className=" ">
+      <SiteLoader />
       {ProductImagesModalActive ? (
         <ProductImagesModal
           selectedImage={selectedImage}
@@ -84,7 +86,7 @@ export const Products = () => {
       )}
 
       <Navbar solidBg={true} />
-      <div className="grid grid-cols-2  mt-20">
+      <div className="grid grid-cols-2  mt-16">
         <div className="grid justify-center">
           <img
             src={selectedImage}
@@ -97,7 +99,11 @@ export const Products = () => {
           <div className="flex gap-2 my-5">{picturesNodeList}</div>
         </div>
         <div>
-          <div>{currentProduct?.name}</div>
+          <div className="montserrat-regular">
+            <h1 className=" text-2xl ">{currentProduct?.name}</h1>
+            <h2 className=" text-xl my-1">€{currentProduct?.price}</h2>
+            <span className=" block h-0.5 bg-gray-400 my-5  "></span>
+          </div>
         </div>
       </div>
       <Footer />

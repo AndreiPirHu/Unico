@@ -3,6 +3,7 @@ import { Footer } from "../../components/footer";
 import { Navbar } from "../../components/navbar/navbar";
 import { ProductList } from "./productList";
 import { RootState } from "../../features/rootReducer";
+import { SiteLoader } from "../../components/siteLoader";
 
 export const Home = () => {
   let productsFromRedux: Products = useSelector(
@@ -11,6 +12,7 @@ export const Home = () => {
 
   return (
     <div id="Home" className="overflow-hidden">
+      <SiteLoader />
       <Navbar solidBg={false} />
 
       <div id="hero">
