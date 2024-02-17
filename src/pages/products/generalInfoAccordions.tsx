@@ -2,7 +2,6 @@ import { useRef, useState } from "react";
 
 export const GeneralInfoAccordions = () => {
   const [shippingIsToggled, setShippingIsToggled] = useState<boolean>(false);
-  const textRef = useRef<HTMLDivElement>(null);
 
   return (
     <div className="montserrat-regular text-sm font-medium  mt-7 relative">
@@ -30,7 +29,6 @@ export const GeneralInfoAccordions = () => {
       </div>
 
       <div
-        ref={textRef}
         className={`transition-all duration-150 ${
           shippingIsToggled ? ` text-black  ` : " text-transparent "
         }`}

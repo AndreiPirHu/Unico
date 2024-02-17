@@ -7,6 +7,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { ProductImagesModal } from "./productImagesModal";
 import { SiteLoader } from "../../components/siteLoader";
 import { GeneralInfoAccordions } from "./generalInfoAccordions";
+import { current } from "immer";
 
 export const Products = () => {
   const { id } = useParams<{ id: string }>();
@@ -21,6 +22,8 @@ export const Products = () => {
   const [chosenSize, setChosenSize] = useState<string>();
   const [chosenQuantity, setChosenQuantity] = useState<number>(1);
   const [cartButtonValue, setCartButtonValue] = useState<string>("Add to Cart");
+  const [buyIsVisible, setBuyIsVisible] = useState<boolean>(false);
+
   const getCurrentProduct = () => {
     setCurrentProduct(products.products.find((product) => product.name == id));
   };
@@ -28,6 +31,7 @@ export const Products = () => {
   const changeImage = (imageUrl: string | undefined) => {
     setSelectedImage(imageUrl);
   };
+  const buyButtonRef = useRef<HTMLDivElement>(null);
 
   const createPicturesNodeList = () => {
     setPicturesNodeList([]);
@@ -69,6 +73,16 @@ export const Products = () => {
     }, 1000);
   };
 
+  const handleScroll = () => {
+    const buyButton: HTMLDivElement | null = buyButtonRef.current;
+    if (buyButton) {
+      const { bottom } = buyButton.getBoundingClientRect();
+
+      console.log(buyButton.getBoundingClientRect().bottom);
+      setBuyIsVisible(bottom <= window.innerHeight);
+    }
+  };
+
   useEffect(() => {
     getCurrentProduct();
   }, [products]);
@@ -88,6 +102,15 @@ export const Products = () => {
     } else document.body.style.overflow = "scroll";
     return () => {};
   }, [ProductImagesModalActive]);
+
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll);
+    handleScroll(); //
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
 
   return (
     <div className=" ">
@@ -201,19 +224,44 @@ export const Products = () => {
                 />
               </button>
             </div>
-            <button
-              className=" w-full h-14 my-10 bg-white text-base border border-gray-800 rounded-sm hover:invert  "
-              onMouseEnter={handleSizeNotChosenEnter}
-              onMouseLeave={handleSizeNotChosenLeave}
-            >
-              {cartButtonValue}
-            </button>
+
+            <div ref={buyButtonRef}>
+              <button
+                className=" w-full h-14 my-10 bg-white text-base border border-gray-800 rounded-sm hover:invert  "
+                onMouseEnter={handleSizeNotChosenEnter}
+                onMouseLeave={handleSizeNotChosenLeave}
+              >
+                {cartButtonValue}
+              </button>
+            </div>
 
             <p className=" text-sm/[25px] ">{currentProduct?.description}</p>
             <GeneralInfoAccordions />
           </div>
         </div>
       </div>
+      {buyIsVisible ? (
+        ""
+      ) : (
+        <div className=" md:hidden montserrat-regular fixed bottom-0 px-9 border-t w-screen py-8  bg-white">
+          <div className="flex justify-between my-3">
+            <p>
+              {currentProduct?.name}
+              {chosenSize ? ` ${chosenSize}` : ""}
+              {chosenQuantity > 1 ? ` (${chosenQuantity})` : ""}
+            </p>
+            <p>{currentProduct?.price} €</p>
+          </div>
+
+          <button
+            className=" w-full h-14   bg-white text-base border border-gray-800 rounded-sm hover:invert   "
+            onMouseEnter={handleSizeNotChosenEnter}
+            onMouseLeave={handleSizeNotChosenLeave}
+          >
+            {cartButtonValue}
+          </button>
+        </div>
+      )}
       <Footer />
     </div>
   );
