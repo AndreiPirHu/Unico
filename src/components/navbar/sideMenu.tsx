@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 
 type sideMenuProps = {
   sideMenuActive: boolean;
@@ -63,7 +64,7 @@ export const SideMenu: React.FC<sideMenuProps> = ({
               shopExpanded ? "translate-y-0" : "-translate-y-[300%]"
             } `}
           >
-            <a href="">About</a>
+            <Link to="">About</Link>
           </div>
         </div>
       </div>

@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 export const Footer = () => {
   return (
     <div className="flex gap-14 mx-9 my-16 montserrat-regular max-lg:grid max-lg:grid-cols-2 max-md:grid-cols-1">
@@ -29,13 +31,13 @@ export const Footer = () => {
         <h3 className="mb-7 text-sm max-md:mb-3">Connect</h3>
         <ul className=" text-xs">
           <li className=" mb-2 hover:opacity-65">
-            <a href="">Contact Us</a>
+            <Link to="">Contact Us</Link>
           </li>
           <li className=" mb-2 hover:opacity-65">
-            <a href="">Careers</a>
+            <Link to="">Careers</Link>
           </li>
           <li className=" mb-2 hover:opacity-65">
-            <a href="">Customer Service</a>
+            <Link to="">Customer Service</Link>
           </li>
         </ul>
       </div>
@@ -43,13 +45,13 @@ export const Footer = () => {
         <h3 className="mb-7 text-sm max-md:mb-3">Company</h3>
         <ul className="text-xs">
           <li className=" mb-2 hover:opacity-65">
-            <a href="">About us</a>
+            <Link to="">About us</Link>
           </li>
           <li className=" mb-2 hover:opacity-65">
-            <a href="">Sustainability</a>
+            <Link to="">Sustainability</Link>
           </li>
           <li className=" mb-2 hover:opacity-65">
-            <a href="">Returns & Exchanges</a>
+            <Link to="">Returns & Exchanges</Link>
           </li>
         </ul>
       </div>

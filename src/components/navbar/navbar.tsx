@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { SearchBar } from "./searchBar";
 import { SideMenu } from "./sideMenu";
+import { Link } from "react-router-dom";
 
 type navbarProps = {
   solidBg: boolean;
@@ -95,25 +96,25 @@ export const Navbar: React.FC<navbarProps> = ({ solidBg }) => {
             ></span>
           </div>
 
-          <a href="" className={`group ml-5 max-md:hidden `}>
+          <Link to="" className={`group ml-5 max-md:hidden `}>
             Journal
             <span
               className={`block h-0.5 ${
                 scrollPosition || hovered ? " bg-gray-600" : "bg-white "
               }   scale-x-0 duration-500 group-hover:scale-x-100`}
             ></span>
-          </a>
-          <a href="" className={`group ml-5 max-md:hidden `}>
+          </Link>
+          <Link to="" className={`group ml-5 max-md:hidden `}>
             About
             <span
               className={`block h-0.5 ${
                 scrollPosition || hovered ? " bg-gray-600" : "bg-white "
               }   scale-x-0 duration-500 group-hover:scale-x-100 `}
             ></span>
-          </a>
+          </Link>
         </div>
         <div className=" flex flex-1 justify-center my-auto">
-          <a href="/">
+          <Link to="/">
             <img
               src="/src/assets/logo-icon.svg"
               alt=""
@@ -121,7 +122,7 @@ export const Navbar: React.FC<navbarProps> = ({ solidBg }) => {
                 scrollPosition || hovered ? "" : "invert "
               }`}
             />
-          </a>
+          </Link>
         </div>
         <div className="flex flex-1 justify-end my-auto mr-10 max-md:mr-5 ">
           <img
@@ -139,14 +140,14 @@ export const Navbar: React.FC<navbarProps> = ({ solidBg }) => {
               scrollPosition || hovered ? "" : "invert "
             }`}
           />
-          <a href="" className={`group mr-5  my-auto max-md:hidden `}>
+          <Link to="" className={`group mr-5  my-auto max-md:hidden `}>
             Account
             <span
               className={`block h-0.5 ${
                 scrollPosition || hovered ? " bg-gray-600" : "bg-white "
               }   scale-x-0 duration-500 group-hover:scale-x-100`}
             ></span>
-          </a>
+          </Link>
           <div
             className={`group mr-5 cursor-pointer max-md:hidden`}
             onClick={() => setSearchBarActive(true)}
@@ -166,7 +167,7 @@ export const Navbar: React.FC<navbarProps> = ({ solidBg }) => {
             ></span>
           </div>
 
-          <a href="" className={`group mr-5 max-md:hidden`}>
+          <Link to="" className={`group mr-5 max-md:hidden`}>
             Cart
             <img
               src="/src/assets/basket-icon.svg"
@@ -180,7 +181,7 @@ export const Navbar: React.FC<navbarProps> = ({ solidBg }) => {
                 scrollPosition || hovered ? " bg-gray-600" : "bg-white "
               }   scale-x-0 duration-500 group-hover:scale-x-100`}
             ></span>
-          </a>
+          </Link>
         </div>
       </div>
 
@@ -196,22 +197,22 @@ export const Navbar: React.FC<navbarProps> = ({ solidBg }) => {
             <h3 className=" text-lg mb-4 text-gray-400">Categories</h3>
             <ul>
               <li className="text-base mb-1 hover:opacity-65">
-                <a href="">New Arrivals</a>
+                <Link to="">New Arrivals</Link>
               </li>
               <li className="text-base mb-1 hover:opacity-65">
-                <a href="">Shop All</a>
+                <Link to="">Shop All</Link>
               </li>
               <li className="text-base mb-1 hover:opacity-65">
-                <a href="">Embroidered Tops</a>
+                <Link to="">Embroidered Tops</Link>
               </li>
               <li className="text-base mb-1 hover:opacity-65">
-                <a href="">4</a>
+                <Link to="">4</Link>
               </li>
               <li className="text-base mb-1 hover:opacity-65">
-                <a href="">5</a>
+                <Link to="">5</Link>
               </li>
               <li className="text-base mb-1 hover:opacity-65">
-                <a href="">6</a>
+                <Link to="">6</Link>
               </li>
             </ul>
           </div>

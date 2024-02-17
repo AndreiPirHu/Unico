@@ -3,13 +3,11 @@ import React, { useRef, useState } from "react";
 type ProductImagesModalProps = {
   selectedImage: string | undefined;
   setProductImagesModalActive: React.Dispatch<React.SetStateAction<boolean>>;
-  productImagesModalActive: boolean;
   picturesNodeList: React.ReactNode[];
 };
 export const ProductImagesModal: React.FC<ProductImagesModalProps> = ({
   selectedImage,
   setProductImagesModalActive,
-  productImagesModalActive,
   picturesNodeList,
 }) => {
   const [imageZoomed, setImageZoomed] = useState<boolean>(false);

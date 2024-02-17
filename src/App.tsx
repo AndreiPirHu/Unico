@@ -7,7 +7,8 @@ import { actions } from "./features/products";
 import { getFirestoreProducts } from "./components/getFirestoreProducts";
 import { useEffect } from "react";
 import { Products } from "./pages/products/products";
-
+import ScrollToTop from "./components/scrollToTop";
+import { SiteLoader } from "./components/siteLoader";
 function App() {
   const dispatch = useDispatch();
 
@@ -28,6 +29,7 @@ function App() {
   return (
     <>
       <Router>
+        <ScrollToTop />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/products/:id" element={<Products />} />

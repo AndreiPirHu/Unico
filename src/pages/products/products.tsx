@@ -7,7 +7,6 @@ import React, { useEffect, useRef, useState } from "react";
 import { ProductImagesModal } from "./productImagesModal";
 import { SiteLoader } from "../../components/siteLoader";
 import { GeneralInfoAccordions } from "./generalInfoAccordions";
-import { current } from "immer";
 
 export const Products = () => {
   const { id } = useParams<{ id: string }>();
@@ -119,7 +118,6 @@ export const Products = () => {
         <ProductImagesModal
           selectedImage={selectedImage}
           setProductImagesModalActive={setProductImagesModalActive}
-          productImagesModalActive={ProductImagesModalActive}
           picturesNodeList={picturesNodeList}
         />
       ) : (

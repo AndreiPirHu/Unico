@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 type productListProps = {
   data: Product[];
@@ -7,24 +7,21 @@ type productListProps = {
 
 export const ProductList: React.FC<productListProps> = ({ data }) => {
   const [nodeList, setNodeList] = useState<React.ReactNode>([]);
-  const navigate = useNavigate();
 
   const createNodeList = () => {
     setNodeList([]);
     for (let product of data) {
       let newItem: React.ReactNode = (
-        <div
-          key={product.name}
-          className=" relative cursor-pointer "
-          onClick={() => navigateToProductPage(product.name)}
-        >
-          <img
-            src={product.images.front}
-            alt=""
-            onMouseEnter={(e) => handleImgHoverOn(e, product.images.back)}
-            onMouseLeave={(e) => handleImgHoverOut(e, product.images.front)}
-            className=" peer "
-          />
+        <div key={product.name} className=" relative cursor-pointer ">
+          <Link to={`/products/${product.name}`}>
+            <img
+              src={product.images.front}
+              alt=""
+              onMouseEnter={(e) => handleImgHoverOn(e, product.images.back)}
+              onMouseLeave={(e) => handleImgHoverOut(e, product.images.front)}
+              className=" peer "
+            />
+          </Link>
 
           <div className=" absolute origin-bottom scale-y-0 duration-500 peer-hover:scale-y-100 bottom-0.5 pointer-events-none w-auto ml-3 ">
             <h3 className="karantina-light text-4xl">{product.name}</h3>
@@ -39,11 +36,6 @@ export const ProductList: React.FC<productListProps> = ({ data }) => {
         return [prevState, newItem];
       });
     }
-  };
-
-  const navigateToProductPage = (title: string) => {
-    const destination: string = `/products/${title}`;
-    navigate(destination);
   };
 
   const handleImgHoverOn = (

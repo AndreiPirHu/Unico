@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useState } from "react";
 
 export const GeneralInfoAccordions = () => {
   const [shippingIsToggled, setShippingIsToggled] = useState<boolean>(false);
