@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "../../features/rootReducer";
+import { Link, useLocation } from "react-router-dom";
 
 type searchBarProps = {
   searchBarActive: boolean;
@@ -18,6 +19,8 @@ export const SearchBar: React.FC<searchBarProps> = ({
   const [nodeList, setNodeList] = useState<React.ReactNode>([]);
 
   const searchRef = useRef<HTMLInputElement>(null);
+
+  const { pathname } = useLocation();
 
   const handleExitSearchBar = () => {
     setSearchBarActive(false);
@@ -52,21 +55,27 @@ export const SearchBar: React.FC<searchBarProps> = ({
               key={product.name}
               className=" relative cursor-pointer mx-auto  "
             >
-              <img
-                src={product.images.front}
-                alt=""
-                onMouseEnter={(e) => handleImgHoverOn(e, product.images.back)}
-                onMouseLeave={(e) => handleImgHoverOut(e, product.images.front)}
-                className=" md:h-[340px] max-md:max-h-[400px]  "
-              />
+              <Link to={`/products/${product.name}`}>
+                <img
+                  src={product.images.front}
+                  alt=""
+                  onMouseEnter={(e) => handleImgHoverOn(e, product.images.back)}
+                  onMouseLeave={(e) =>
+                    handleImgHoverOut(e, product.images.front)
+                  }
+                  className=" md:h-[340px] max-md:max-h-[400px]  "
+                />
 
-              <div className=" absolute bottom-0.5 pointer-events-none w-auto ml-3 ">
-                <h3 className="karantina-light text-3xl">{product.name}</h3>
-                <p className=" inline-block text-lg">€</p>
-                <p className="karantina-light inline-block ml-1 text-2xl ">
-                  {product.price}
-                </p>
-              </div>
+                <div className=" sm:absolute sm:bottom-0.5 pointer-events-none w-auto ml-3 ">
+                  <h3 className="karantina-light text-3xl max-sm:text-2xl">
+                    {product.name}
+                  </h3>
+                  <p className=" inline-block text-lg">€</p>
+                  <p className="karantina-light inline-block ml-1 text-2xl ">
+                    {product.price}
+                  </p>
+                </div>
+              </Link>
             </div>
           );
           setNodeList((prevState) => {
@@ -111,6 +120,10 @@ export const SearchBar: React.FC<searchBarProps> = ({
     }
   }, [searchBarActive]);
 
+  useEffect(() => {
+    setSearchBarActive(false);
+  }, [pathname]);
+
   return (
     <search
       className={`grid grid-rows-[auto,1fr] z-50 fixed w-full h-full transition-all duration-200 max-md:overflow-scroll   ${
@@ -148,7 +161,7 @@ export const SearchBar: React.FC<searchBarProps> = ({
             />
           </button>
         </div>
-        <div className="bg-white flex gap-5 justify-center py-10 px-10 max-md:flex-wrap ">
+        <div className="bg-white flex  gap-5 justify-center py-10 px-10 max-md:flex-wrap max-sm:px-3 max-sm:grid max-sm:grid-cols-2">
           {nodeList}
         </div>
       </div>

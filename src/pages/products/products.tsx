@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import { Footer } from "../../components/footer";
 import { Navbar } from "../../components/navbar/navbar";
 import { useSelector } from "react-redux";
@@ -22,6 +22,8 @@ export const Products = () => {
   const [chosenQuantity, setChosenQuantity] = useState<number>(1);
   const [cartButtonValue, setCartButtonValue] = useState<string>("Add to Cart");
   const [buyIsVisible, setBuyIsVisible] = useState<boolean>(false);
+
+  const { pathname } = useLocation();
 
   const getCurrentProduct = () => {
     setCurrentProduct(products.products.find((product) => product.name == id));
@@ -83,7 +85,7 @@ export const Products = () => {
 
   useEffect(() => {
     getCurrentProduct();
-  }, [products]);
+  }, [products, pathname]);
 
   useEffect(() => {
     setSelectedImage(currentProduct?.images.front);
@@ -240,7 +242,7 @@ export const Products = () => {
       {buyIsVisible ? (
         ""
       ) : (
-        <div className=" md:hidden montserrat-regular fixed bottom-0 px-9 border-t w-screen py-8  bg-white">
+        <div className=" md:hidden montserrat-regular fixed bottom-0 px-9 border-t w-screen py-3  bg-white">
           <div className="flex justify-between my-3">
             <p>
               {currentProduct?.name}
