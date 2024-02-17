@@ -6,6 +6,7 @@ import { RootState } from "../../features/rootReducer";
 import React, { useEffect, useRef, useState } from "react";
 import { ProductImagesModal } from "./productImagesModal";
 import { SiteLoader } from "../../components/siteLoader";
+import { GeneralInfoAccordions } from "./generalInfoAccordions";
 
 export const Products = () => {
   const { id } = useParams<{ id: string }>();
@@ -103,7 +104,7 @@ export const Products = () => {
       )}
 
       <Navbar solidBg={true} />
-      <div className="grid grid-cols-2 mt-16 px-5">
+      <div className="grid grid-cols-2 mt-16 px-9  max-md:grid-cols-1">
         <div className="grid justify-center">
           <img
             src={selectedImage}
@@ -115,13 +116,13 @@ export const Products = () => {
           />
           <div className="flex gap-2 my-5">{picturesNodeList}</div>
         </div>
-        <div className="pl-10">
+        <div className="md:pl-10 lg:mr-[15%]">
           <div className="montserrat-regular">
             <h1 className=" text-2xl ">{currentProduct?.name}</h1>
             <h2 className=" text-xl my-1">€{currentProduct?.price}</h2>
-            <span className=" block h-0.5 bg-gray-400 my-5  "></span>
+            <span className=" block h-px bg-gray-400 my-5  "></span>
             <h3 className="text-sm montserrat-bold">Size</h3>
-            <div className=" flex gap-2 my-3">
+            <div className=" flex flex-wrap gap-2 my-3">
               <button
                 className={`w-10 h-10 rounded-sm border hover:border-gray-800 text-sm ${
                   chosenSize == "XS" ? "border-gray-800" : " "
@@ -164,14 +165,40 @@ export const Products = () => {
               </button>
             </div>
 
-            <h3 className="text-sm montserrat-bold">Quantity</h3>
+            <h3 className="text-sm montserrat-bold mt-5 mb-3">Quantity</h3>
             <div className="flex">
-              <button>
-                <img src="/src/assets/minus-icon.svg" alt="" className="h-10" />
+              <button
+                onClick={() =>
+                  setChosenQuantity((prevValue) => {
+                    if (prevValue > 1) {
+                      return prevValue - 1;
+                    } else {
+                      return prevValue;
+                    }
+                  })
+                }
+              >
+                <img
+                  src="/src/assets/minus-icon.svg"
+                  alt=""
+                  className="h-10 w-10 border hover:border-gray-800"
+                />
               </button>
-              <h3>{chosenQuantity}</h3>
-              <button>
-                <img src="/src/assets/plus-icon.svg" alt="" className="h-10" />
+              <h3 className=" flex h-10 w-10 items-center justify-center border  mx-3">
+                {chosenQuantity}
+              </h3>
+              <button
+                onClick={() =>
+                  setChosenQuantity((prevValue) => {
+                    return prevValue + 1;
+                  })
+                }
+              >
+                <img
+                  src="/src/assets/plus-icon.svg"
+                  alt=""
+                  className="h-10 w-10 border hover:border-gray-800"
+                />
               </button>
             </div>
             <button
@@ -181,6 +208,9 @@ export const Products = () => {
             >
               {cartButtonValue}
             </button>
+
+            <p className=" text-sm/[25px] ">{currentProduct?.description}</p>
+            <GeneralInfoAccordions />
           </div>
         </div>
       </div>

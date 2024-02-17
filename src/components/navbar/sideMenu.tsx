@@ -59,7 +59,7 @@ export const SideMenu: React.FC<sideMenuProps> = ({
           </div>
 
           <div
-            className={`py-3 px-4 flex justify-between cursor-pointer transition-all duration-300 ${
+            className={`py-3 px-4 flex justify-between cursor-pointer transition-all duration-500 ${
               shopExpanded ? "translate-y-0" : "-translate-y-[300%]"
             } `}
           >

@@ -62,7 +62,6 @@ export const ProductImagesModal: React.FC<ProductImagesModalProps> = ({
             setImageZoomed(false);
           }}
         >
-          {picturesNodeList} {picturesNodeList} {picturesNodeList}{" "}
           {picturesNodeList}
         </div>
       </div>
