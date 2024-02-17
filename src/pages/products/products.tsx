@@ -77,8 +77,11 @@ export const Products = () => {
     if (buyButton) {
       const { bottom } = buyButton.getBoundingClientRect();
 
-      console.log(buyButton.getBoundingClientRect().bottom);
       setBuyIsVisible(bottom <= window.innerHeight);
+
+      console.log(bottom <= window.innerHeight);
+      console.log(bottom);
+      console.log(window.innerHeight);
     }
   };
 
@@ -104,8 +107,8 @@ export const Products = () => {
 
   useEffect(() => {
     window.addEventListener("scroll", handleScroll);
-    handleScroll(); //
-
+    handleScroll();
+    setBuyIsVisible(false);
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
