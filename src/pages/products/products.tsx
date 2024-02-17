@@ -78,10 +78,6 @@ export const Products = () => {
       const { bottom } = buyButton.getBoundingClientRect();
 
       setBuyIsVisible(bottom <= window.innerHeight);
-
-      console.log(bottom <= window.innerHeight);
-      console.log(bottom);
-      console.log(window.innerHeight);
     }
   };
 
