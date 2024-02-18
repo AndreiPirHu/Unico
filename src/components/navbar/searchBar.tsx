@@ -38,7 +38,7 @@ export const SearchBar: React.FC<searchBarProps> = ({
   };
 
   const loadingNode: React.ReactNode = (
-    <div>
+    <div className=" absolute w-full h-full flex justify-center -top-1/4">
       <div className="w-12 h-12 border-8 text-4xl animate-spin border-gray-300 flex items-center justify-center border-t-black rounded-full"></div>
     </div>
   );
@@ -84,8 +84,10 @@ export const SearchBar: React.FC<searchBarProps> = ({
         }
       } else {
         let noResultsNode: React.ReactNode = (
-          <div className="montserrat-regular">
-            Sorry, we couldn't find any results
+          <div className="absolute w-full flex justify-center items-center top-1/4">
+            <p className="montserrat-regular">
+              Sorry, we couldn't find any results
+            </p>
           </div>
         );
         setNodeList(noResultsNode);
@@ -161,10 +163,12 @@ export const SearchBar: React.FC<searchBarProps> = ({
             />
           </button>
         </div>
-        <div className="bg-white flex  gap-5 justify-center py-10 px-10 max-md:flex-wrap max-sm:px-3 max-sm:grid max-sm:grid-cols-2">
+
+        <div className="relative bg-white flex gap-5 justify-center py-10 px-10 max-md:flex-wrap max-sm:px-3 max-sm:grid max-sm:grid-cols-2">
           {nodeList}
         </div>
       </div>
+
       <div
         className={` bg-[rgba(0,0,0,.3)] w-screen z-10 transition-opacity duration-300 ${
           searchBarActive
