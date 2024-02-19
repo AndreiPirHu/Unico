@@ -1,12 +1,14 @@
 import { useLocation, useParams } from "react-router-dom";
 import { Footer } from "../../components/footer/footer";
 import { Navbar } from "../../components/navbar/navbar";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../features/rootReducer";
 import React, { useEffect, useRef, useState } from "react";
 import { ProductImagesModal } from "./productImagesModal";
 import { SiteLoader } from "../../components/siteLoader";
 import { GeneralInfoAccordions } from "./generalInfoAccordions";
+import { actions } from "../../features/cart";
+import { v4 as uuidv4 } from "uuid";
 
 export const Products = () => {
   const { id } = useParams<{ id: string }>();
@@ -18,7 +20,7 @@ export const Products = () => {
   );
   const [ProductImagesModalActive, setProductImagesModalActive] =
     useState<boolean>(false);
-  const [chosenSize, setChosenSize] = useState<string>();
+  const [chosenSize, setChosenSize] = useState<string>("");
   const [chosenQuantity, setChosenQuantity] = useState<number>(1);
   const [cartButtonValue, setCartButtonValue] = useState<string>("Add to Cart");
   const [buyIsVisible, setBuyIsVisible] = useState<boolean>(false);
@@ -33,6 +35,8 @@ export const Products = () => {
     setSelectedImage(imageUrl);
   };
   const buyButtonRef = useRef<HTMLDivElement>(null);
+
+  const dispatch = useDispatch();
 
   const createPicturesNodeList = () => {
     setPicturesNodeList([]);
@@ -80,6 +84,51 @@ export const Products = () => {
       const { bottom } = buyButton.getBoundingClientRect();
 
       setBuyIsVisible(bottom <= window.innerHeight);
+    }
+  };
+
+  const handleAddToCart = () => {
+    if (currentProduct && chosenSize) {
+      for (let i = 0; i < chosenQuantity; i++) {
+        const newCartProduct: CartProduct = {
+          ...currentProduct,
+          id: uuidv4(),
+          size: chosenSize,
+        };
+        //sending to react
+        dispatch(actions.addToCart(newCartProduct));
+
+        //sending to localstorage
+        //get the current cart
+        const currentLocalStorageCartString = localStorage.getItem("cartItems");
+        //check if it existed, needed due to typescript
+        if (currentLocalStorageCartString) {
+          //parses the current cart
+          const currentLocalStorageCart = JSON.parse(
+            currentLocalStorageCartString
+          );
+          //updates the cart with the new item
+          const updatedLocalStorageCart = [
+            ...currentLocalStorageCart,
+            newCartProduct,
+          ];
+          //sends the updated cart to localstorage
+          localStorage.setItem(
+            "cartItems",
+            JSON.stringify(updatedLocalStorageCart)
+          );
+        } else {
+          //updates the cart with the new item
+          const updatedLocalStorageCart = [newCartProduct];
+          //sends the updated cart to localstorage
+          localStorage.setItem(
+            "cartItems",
+            JSON.stringify(updatedLocalStorageCart)
+          );
+        }
+      }
+    } else {
+      return;
     }
   };
 
@@ -229,6 +278,7 @@ export const Products = () => {
                 className=" w-full h-14 my-10 bg-white text-base border border-gray-800 rounded-sm hover:invert  "
                 onMouseEnter={handleSizeNotChosenEnter}
                 onMouseLeave={handleSizeNotChosenLeave}
+                onClick={handleAddToCart}
               >
                 {cartButtonValue}
               </button>

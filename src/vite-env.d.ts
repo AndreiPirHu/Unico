@@ -12,3 +12,8 @@ type Product = {
 type Products = {
   products: Product[];
 };
+
+type CartProduct = Product & {
+  id: string;
+  size: string;
+};

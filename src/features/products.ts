@@ -12,6 +12,7 @@ const initialState: Products = {
 
 const reducer = createReducer(initialState, (builder) => {
   builder.addCase(addProducts, (state, action) => ({
+    //...state is included to preserve other values in initialState that are not in products:
     ...state,
     products: action.payload.products,
   }));
