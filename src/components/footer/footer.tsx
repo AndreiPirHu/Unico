@@ -1,8 +1,30 @@
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { NewsletterModal } from "./newsletterModal";
 
 export const Footer = () => {
+  const [newsletterModalActive, setNewsletterModalActive] =
+    useState<boolean>(false);
+
+  const handleNewsletterSignup = (event: React.SyntheticEvent) => {
+    event.preventDefault();
+    setNewsletterModalActive(true);
+  };
+
+  useEffect(() => {
+    if (newsletterModalActive) {
+      document.body.style.overflow = "hidden";
+    } else document.body.style.overflow = "scroll";
+    return () => {};
+  }, [newsletterModalActive]);
+
   return (
-    <div className="flex gap-14 mx-9 my-16 montserrat-regular max-lg:grid max-lg:grid-cols-2 max-md:grid-cols-1">
+    <div className="flex gap-14 px-9 py-16  montserrat-regular max-lg:grid max-lg:grid-cols-2 max-md:grid-cols-1 border-t">
+      {newsletterModalActive ? (
+        <NewsletterModal setNewsletterModalActive={setNewsletterModalActive} />
+      ) : (
+        ""
+      )}
       <div>
         <h3 className="  text-sm  mb-7 max-md:mb-3">About UNICO</h3>
         <p className=" text-xs mb-7">
@@ -56,18 +78,21 @@ export const Footer = () => {
         </ul>
       </div>
       <div>
-        <h3 className="mb-7 text-sm max-md:mb-3">Newsletter</h3>
-        <p className=" text-xs">
-          Sign up for exclusive offers, original stories, events and more.
-        </p>
-        <input
-          type="text"
-          placeholder="Enter email"
-          className=" border border-gray-500 rounded-sm my-4 p-3 text-xs w-96 max-lg:w-10/12"
-        />
-        <button className=" block border border-black py-2 px-5 rounded-sm text-sm hover:bg-black hover:text-white">
-          Sign up
-        </button>
+        <form onSubmit={handleNewsletterSignup}>
+          <h3 className="mb-7 text-sm max-md:mb-3">Newsletter</h3>
+          <p className=" text-xs">
+            Sign up for exclusive offers, original stories, events and more.
+          </p>
+          <input
+            type="email"
+            placeholder="Enter email"
+            className=" border border-gray-500 rounded-sm my-4 p-3 text-xs w-96 max-lg:w-10/12"
+            required
+          />
+          <button className=" block border border-black py-2 px-5 rounded-sm text-sm hover:bg-black hover:text-white">
+            Sign up
+          </button>
+        </form>
       </div>
     </div>
   );

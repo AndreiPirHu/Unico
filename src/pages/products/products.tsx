@@ -1,5 +1,5 @@
 import { useLocation, useParams } from "react-router-dom";
-import { Footer } from "../../components/footer";
+import { Footer } from "../../components/footer/footer";
 import { Navbar } from "../../components/navbar/navbar";
 import { useSelector } from "react-redux";
 import { RootState } from "../../features/rootReducer";
@@ -113,7 +113,7 @@ export const Products = () => {
   }, []);
 
   return (
-    <div className=" ">
+    <div>
       <SiteLoader />
       {ProductImagesModalActive ? (
         <ProductImagesModal
@@ -126,7 +126,7 @@ export const Products = () => {
       )}
 
       <Navbar solidBg={true} />
-      <div className="grid grid-cols-2 mt-16 px-9  max-md:grid-cols-1">
+      <div className="grid grid-cols-2 my-16 px-9  max-md:grid-cols-1">
         <div className="grid justify-center">
           <img
             src={selectedImage}

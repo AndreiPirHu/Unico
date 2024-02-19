@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux";
-import { Footer } from "../../components/footer";
+import { Footer } from "../../components/footer/footer";
 import { Navbar } from "../../components/navbar/navbar";
 import { ProductList } from "./productList";
 import { RootState } from "../../features/rootReducer";
