@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { SearchBar } from "./searchBar";
 import { SideMenu } from "./sideMenu";
 import { Link } from "react-router-dom";
+import { Cart } from "./cart/cart";
 
 type navbarProps = {
   solidBg: boolean;
@@ -12,6 +13,7 @@ export const Navbar: React.FC<navbarProps> = ({ solidBg }) => {
   const [hovered, setHovered] = useState<boolean>(false);
   const [searchBarActive, setSearchBarActive] = useState<boolean>(false);
   const [sideMenuActive, setSideMenuActive] = useState<boolean>(false);
+  const [cartActive, setCartActive] = useState<boolean>(false);
   let hoverTimeout = useRef<number | null>(null);
 
   const handleScroll = () => {
@@ -50,6 +52,7 @@ export const Navbar: React.FC<navbarProps> = ({ solidBg }) => {
 
   return (
     <nav className={`montserrat-regular ${solidBg ? "pb-24" : ""}`}>
+      <Cart setCartActive={setCartActive} cartActive={cartActive} />
       <SideMenu
         setSideMenuActive={setSideMenuActive}
         sideMenuActive={sideMenuActive}
@@ -135,7 +138,8 @@ export const Navbar: React.FC<navbarProps> = ({ solidBg }) => {
 
           <img
             src="/src/assets/basket-icon.svg"
-            alt=""
+            alt="basket icon"
+            onClick={() => setCartActive(true)}
             className={` inline cursor-pointer h-11 p-2 md:hidden ${
               scrollPosition || hovered ? "" : "invert "
             }`}
@@ -167,7 +171,10 @@ export const Navbar: React.FC<navbarProps> = ({ solidBg }) => {
             ></span>
           </div>
 
-          <Link to="" className={`group mr-5 max-md:hidden`}>
+          <div
+            onClick={() => setCartActive(true)}
+            className={`group mr-5 cursor-pointer max-md:hidden`}
+          >
             Cart
             <img
               src="/src/assets/basket-icon.svg"
@@ -181,7 +188,7 @@ export const Navbar: React.FC<navbarProps> = ({ solidBg }) => {
                 scrollPosition || hovered ? " bg-gray-600" : "bg-white "
               }   scale-x-0 duration-500 group-hover:scale-x-100`}
             ></span>
-          </Link>
+          </div>
         </div>
       </div>
 

@@ -95,9 +95,11 @@ export const Products = () => {
           id: uuidv4(),
           size: chosenSize,
         };
+        setChosenQuantity(1);
         //sending to react
         dispatch(actions.addToCart(newCartProduct));
 
+        ///IF NOT ONLINE!
         //sending to localstorage
         //get the current cart
         const currentLocalStorageCartString = localStorage.getItem("cartItems");
@@ -151,6 +153,10 @@ export const Products = () => {
     } else document.body.style.overflow = "scroll";
     return () => {};
   }, [ProductImagesModalActive]);
+
+  useEffect(() => {
+    setCartButtonValue("Add to Cart");
+  }, [chosenSize]);
 
   useEffect(() => {
     window.addEventListener("scroll", handleScroll);

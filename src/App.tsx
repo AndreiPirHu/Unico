@@ -2,16 +2,20 @@ import { HashRouter as Router, Route, Routes } from "react-router-dom";
 import "./App.css";
 import { Home } from "./pages/home/home";
 import "./index.css";
-import { useDispatch } from "react-redux";
-import { actions } from "./features/products";
+import { useDispatch, useSelector } from "react-redux";
+import { actions as productsActions } from "./features/products";
+import { actions as cartActions } from "./features/cart";
 import { getFirestoreProducts } from "./components/getFirestoreProducts";
 import { useEffect } from "react";
 import { Products } from "./pages/products/products";
 import ScrollToTop from "./components/scrollToTop";
-import { SiteLoader } from "./components/siteLoader";
+import { RootState } from "./features/rootReducer";
+
 function App() {
+  const cartProducts = useSelector((state: RootState) => state.cart);
   const dispatch = useDispatch();
 
+  //gets product list form firebase
   const getProductsFromDatabase = async () => {
     //has to await the promise to resolve
     const products = await getFirestoreProducts();
@@ -19,11 +23,42 @@ function App() {
     let fetchedProducts: Products = {
       products: products,
     };
-    dispatch(actions.addProducts(fetchedProducts));
+    dispatch(productsActions.addProducts(fetchedProducts));
+  };
+
+  //gets user cart from localstorage
+  const getCartProducts = () => {
+    //Fetching saved cart from localstorage
+    //get the saved cart
+    const currentLocalStorageCartString = localStorage.getItem("cartItems");
+    //check if it existed (needed due to typescript)
+    if (currentLocalStorageCartString) {
+      //parses the saved cart
+      const currentLocalStorageCart: CartProduct[] = JSON.parse(
+        currentLocalStorageCartString
+      );
+      //empties the redux cart first
+      dispatch(cartActions.clearCart());
+      //sends the saved cart to redux
+      for (let cartItem of currentLocalStorageCart) {
+        dispatch(cartActions.addToCart(cartItem));
+      }
+    }
+  };
+
+  const updateLocalStorageCart = () => {
+    localStorage.setItem("cartItems", JSON.stringify(cartProducts));
   };
 
   useEffect(() => {
+    setTimeout(() => {
+      updateLocalStorageCart();
+    }, 100);
+  }, [cartProducts]);
+
+  useEffect(() => {
     getProductsFromDatabase();
+    getCartProducts();
   }, []);
 
   return (
