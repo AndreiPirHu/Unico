@@ -9,18 +9,20 @@ export const Cart: React.FC<cartProps> = ({ cartActive, setCartActive }) => {
   const [totalAmount, setTotalAmount] = useState<number>(0);
   return (
     <menu
-      className={`fixed w-full h-full flex z-50 transition-all duration-500  ${
-        cartActive ? " translate-x-0" : " translate-x-full"
+      className={`fixed w-full h-full flex z-50 bg-[rgba(0,0,0,.3)] transition-all  ${
+        cartActive ? " opacity-100" : " opacity-0 pointer-events-none"
       }`}
     >
       <div
-        className={` flex-1 z-0 bg-[rgba(0,0,0,.3)] transition-all duration-500 origin-right ${
-          cartActive ? "scale-x-100 " : "scale-x-0"
-        }`}
+        className={` flex-1 z-50 `}
         onClick={() => setCartActive(false)}
       ></div>
 
-      <div className=" bg-white w-[400px] max-[500px]:w-[75vw] flex flex-col  ">
+      <div
+        className={` bg-white w-[400px] max-[500px]:w-[75vw] flex flex-col transition-all duration-500 ${
+          cartActive ? "translate-x-0" : "translate-x-full"
+        }`}
+      >
         <div className="flex border-b  h-14 flex-none">
           <img
             src="/src/assets/close-icon.svg"

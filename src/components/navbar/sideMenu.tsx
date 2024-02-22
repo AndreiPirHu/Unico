@@ -13,11 +13,15 @@ export const SideMenu: React.FC<sideMenuProps> = ({
   const [shopExpanded, setShopExpanded] = useState<boolean>(false);
   return (
     <menu
-      className={`fixed w-full h-full flex z-50 transition-all duration-500  ${
-        sideMenuActive ? " translate-x-0" : " -translate-x-full"
-      }`}
+      className={`fixed w-full h-full bg-[rgba(0,0,0,.3)] flex z-50 transition-all  ${
+        sideMenuActive ? " opacity-100" : "opacity-0 pointer-events-none"
+      } `}
     >
-      <div className=" bg-white w-[75vw]">
+      <div
+        className={` bg-white w-[75vw] transition-all duration-500 ${
+          sideMenuActive ? " translate-x-0" : " -translate-x-full"
+        }`}
+      >
         <div className="flex justify-end border-b  h-14">
           <img
             src="/src/assets/close-icon.svg"
@@ -78,9 +82,7 @@ export const SideMenu: React.FC<sideMenuProps> = ({
         </div>
       </div>
       <div
-        className={` flex-1 z-0 bg-[rgba(0,0,0,.3)] transition-all duration-500 origin-left ${
-          sideMenuActive ? "scale-x-100 " : "scale-x-0"
-        }`}
+        className={`flex-1 z-50`}
         onClick={() => setSideMenuActive(false)}
       ></div>
     </menu>
