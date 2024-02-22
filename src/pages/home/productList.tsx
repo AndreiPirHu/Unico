@@ -11,6 +11,8 @@ export const ProductList: React.FC<productListProps> = ({ data }) => {
   const createNodeList = () => {
     setNodeList([]);
     for (let product of data) {
+      //for (let i = 0; i < Math.min(6, data.length); i++) {
+      //const product = data[i];
       let newItem: React.ReactNode = (
         <div key={product.name} className=" relative cursor-pointer ">
           <Link to={`/products/${product.name}`}>

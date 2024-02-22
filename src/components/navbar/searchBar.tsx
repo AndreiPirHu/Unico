@@ -48,7 +48,7 @@ export const SearchBar: React.FC<searchBarProps> = ({
     setTimeout(() => {
       setNodeList([]);
       if (filteredProducts.length != 0) {
-        for (let i = 0; i < Math.min(3, filteredProducts.length); i++) {
+        for (let i = 0; i < Math.min(6, filteredProducts.length); i++) {
           const product = filteredProducts[i];
           let newProduct: React.ReactNode = (
             <div

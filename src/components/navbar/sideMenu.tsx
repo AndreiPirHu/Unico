@@ -50,18 +50,27 @@ export const SideMenu: React.FC<sideMenuProps> = ({
                   : "scale-y-0 opacity-0 "
               }`}
             >
-              <li className="py-3 px-4">New Arrivals</li>
-              <li className="py-3 px-4">Shop All</li>
-              <li className="py-3 px-4">Embroidered Tops</li>
-              <li></li>
-              <li></li>
-              <li></li>
+              <li className="py-3 px-4">
+                <Link to="">New Arrivals</Link>
+              </li>
+              <li className="py-3 px-4">
+                <Link to="">Shop All</Link>
+              </li>
+              <li className="py-3 px-4">
+                <Link to="">Embroidered Tops</Link>
+              </li>
+              <li className="py-3 px-4">
+                <Link to="">Crocheted Tops</Link>
+              </li>
+              <li className="py-3 px-4">
+                <Link to="">Stitched Tops</Link>
+              </li>
             </ul>
           </div>
 
           <div
             className={`py-3 px-4 flex justify-between cursor-pointer transition-all duration-500 ${
-              shopExpanded ? "translate-y-0" : "-translate-y-[300%]"
+              shopExpanded ? "translate-y-0" : "-translate-y-[500%]"
             } `}
           >
             <Link to="">About</Link>

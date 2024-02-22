@@ -24,6 +24,7 @@ export const Products = () => {
   const [chosenQuantity, setChosenQuantity] = useState<number>(1);
   const [cartButtonValue, setCartButtonValue] = useState<string>("Add to Cart");
   const [buyIsVisible, setBuyIsVisible] = useState<boolean>(false);
+  const [productAdded, setProductAdded] = useState<boolean>(false);
 
   const { pathname } = useLocation();
 
@@ -96,39 +97,10 @@ export const Products = () => {
           size: chosenSize,
         };
         setChosenQuantity(1);
-        //sending to react
+        //sending to redux, localstorage updates automatically
         dispatch(actions.addToCart(newCartProduct));
-
-        ///IF NOT ONLINE!
-        //sending to localstorage
-        //get the current cart
-        const currentLocalStorageCartString = localStorage.getItem("cartItems");
-        //check if it existed, needed due to typescript
-        if (currentLocalStorageCartString) {
-          //parses the current cart
-          const currentLocalStorageCart = JSON.parse(
-            currentLocalStorageCartString
-          );
-          //updates the cart with the new item
-          const updatedLocalStorageCart = [
-            ...currentLocalStorageCart,
-            newCartProduct,
-          ];
-          //sends the updated cart to localstorage
-          localStorage.setItem(
-            "cartItems",
-            JSON.stringify(updatedLocalStorageCart)
-          );
-        } else {
-          //updates the cart with the new item
-          const updatedLocalStorageCart = [newCartProduct];
-          //sends the updated cart to localstorage
-          localStorage.setItem(
-            "cartItems",
-            JSON.stringify(updatedLocalStorageCart)
-          );
-        }
       }
+      setProductAdded(true);
     } else {
       return;
     }
@@ -180,7 +152,11 @@ export const Products = () => {
         ""
       )}
 
-      <Navbar solidBg={true} />
+      <Navbar
+        solidBg={true}
+        productAdded={productAdded}
+        setProductAdded={setProductAdded}
+      />
       <div className="grid grid-cols-2 my-16 px-9  max-md:grid-cols-1">
         <div className="grid justify-center">
           <img
@@ -191,7 +167,9 @@ export const Products = () => {
               setProductImagesModalActive(true);
             }}
           />
-          <div className="flex gap-2 my-5">{picturesNodeList}</div>
+          <div className="flex gap-2 my-5 max-w-[400px] overflow-scroll">
+            {picturesNodeList}
+          </div>
         </div>
         <div className="md:pl-10 lg:mr-[15%]">
           <div className="montserrat-regular">
@@ -312,6 +290,7 @@ export const Products = () => {
             className=" w-full h-14   bg-white text-base border border-gray-800 rounded-sm hover:invert   "
             onMouseEnter={handleSizeNotChosenEnter}
             onMouseLeave={handleSizeNotChosenLeave}
+            onClick={handleAddToCart}
           >
             {cartButtonValue}
           </button>

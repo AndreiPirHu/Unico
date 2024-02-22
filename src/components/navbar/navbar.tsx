@@ -3,18 +3,28 @@ import { SearchBar } from "./searchBar";
 import { SideMenu } from "./sideMenu";
 import { Link } from "react-router-dom";
 import { Cart } from "./cart/cart";
+import { useSelector } from "react-redux";
+import { RootState } from "../../features/rootReducer";
 
 type navbarProps = {
   solidBg: boolean;
+  productAdded?: boolean;
+  setProductAdded?: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-export const Navbar: React.FC<navbarProps> = ({ solidBg }) => {
+export const Navbar: React.FC<navbarProps> = ({
+  solidBg,
+  productAdded,
+  setProductAdded,
+}) => {
   const [scrollPosition, setScrollPosition] = useState<boolean>(false);
   const [hovered, setHovered] = useState<boolean>(false);
   const [searchBarActive, setSearchBarActive] = useState<boolean>(false);
   const [sideMenuActive, setSideMenuActive] = useState<boolean>(false);
   const [cartActive, setCartActive] = useState<boolean>(false);
   let hoverTimeout = useRef<number | null>(null);
+
+  const cartProducts = useSelector((state: RootState) => state.cart);
 
   const handleScroll = () => {
     setScrollPosition(() => {
@@ -36,6 +46,25 @@ export const Navbar: React.FC<navbarProps> = ({ solidBg }) => {
   const handleHoverOff = () => {
     hoverTimeout.current = window.setTimeout(() => setHovered(false), 400);
   };
+
+  useEffect(() => {
+    if (productAdded && setProductAdded) {
+      setCartActive(true);
+      setTimeout(() => {
+        setCartActive(false);
+        setProductAdded(false);
+      }, 1000);
+    }
+  }, [productAdded]);
+
+  useEffect(() => {}, [cartProducts]);
+
+  useEffect(() => {
+    if (cartActive || sideMenuActive || searchBarActive) {
+      document.body.style.overflow = "hidden";
+    } else document.body.style.overflow = "scroll";
+    return () => {};
+  }, [cartActive, sideMenuActive, searchBarActive]);
 
   useEffect(() => {
     if (solidBg) {
@@ -135,15 +164,24 @@ export const Navbar: React.FC<navbarProps> = ({ solidBg }) => {
               scrollPosition || hovered ? "" : "invert "
             }`}
           />
+          <div className="relative">
+            <img
+              src="/src/assets/basket-icon.svg"
+              alt="basket icon"
+              onClick={() => setCartActive(true)}
+              className={` inline cursor-pointer h-11 p-2 md:hidden ${
+                scrollPosition || hovered ? "" : "invert "
+              }`}
+            />
+            {cartProducts.length > 0 ? (
+              <div className="absolute top-1 -right-px bg-black text-white text-xs font-medium rounded-full px-2 py-1 md:hidden pointer-events-none ">
+                {cartProducts.length}
+              </div>
+            ) : (
+              ""
+            )}
+          </div>
 
-          <img
-            src="/src/assets/basket-icon.svg"
-            alt="basket icon"
-            onClick={() => setCartActive(true)}
-            className={` inline cursor-pointer h-11 p-2 md:hidden ${
-              scrollPosition || hovered ? "" : "invert "
-            }`}
-          />
           <Link to="" className={`group mr-5  my-auto max-md:hidden `}>
             Account
             <span
@@ -156,14 +194,16 @@ export const Navbar: React.FC<navbarProps> = ({ solidBg }) => {
             className={`group mr-5 cursor-pointer max-md:hidden`}
             onClick={() => setSearchBarActive(true)}
           >
-            Search
-            <img
-              src="/src/assets/search-icon.svg"
-              alt=""
-              className={` inline h-4 ml-1  ${
-                scrollPosition || hovered ? "" : "invert "
-              }`}
-            />
+            <div className="mt-[3px] ">
+              Search
+              <img
+                src="/src/assets/search-icon.svg"
+                alt=""
+                className={` inline h-6 ml-1  ${
+                  scrollPosition || hovered ? "" : "invert "
+                }`}
+              />
+            </div>
             <span
               className={`block h-0.5 ${
                 scrollPosition || hovered ? " bg-gray-600" : "bg-white "
@@ -173,16 +213,26 @@ export const Navbar: React.FC<navbarProps> = ({ solidBg }) => {
 
           <div
             onClick={() => setCartActive(true)}
-            className={`group mr-5 cursor-pointer max-md:hidden`}
+            className={`relative group mr-5 cursor-pointer max-md:hidden`}
           >
-            Cart
-            <img
-              src="/src/assets/basket-icon.svg"
-              alt=""
-              className={` inline h-4 ml-1  ${
-                scrollPosition || hovered ? "" : "invert"
-              }`}
-            />
+            <div className="mt-[3px] ">
+              Cart
+              <img
+                src="/src/assets/basket-icon.svg"
+                alt=""
+                className={` inline h-6 ml-1  ${
+                  scrollPosition || hovered ? "" : "invert"
+                }`}
+              />
+              {cartProducts.length > 0 ? (
+                <div className="absolute top-1 -right-3 bg-black text-white text-xs font-medium rounded-full px-2  ">
+                  {cartProducts.length}
+                </div>
+              ) : (
+                ""
+              )}
+            </div>
+
             <span
               className={`block h-0.5 ${
                 scrollPosition || hovered ? " bg-gray-600" : "bg-white "
@@ -213,13 +263,10 @@ export const Navbar: React.FC<navbarProps> = ({ solidBg }) => {
                 <Link to="">Embroidered Tops</Link>
               </li>
               <li className="text-base mb-1 hover:opacity-65">
-                <Link to="">4</Link>
+                <Link to="">Crocheted Tops</Link>
               </li>
               <li className="text-base mb-1 hover:opacity-65">
-                <Link to="">5</Link>
-              </li>
-              <li className="text-base mb-1 hover:opacity-65">
-                <Link to="">6</Link>
+                <Link to="">Stitched Tops</Link>
               </li>
             </ul>
           </div>
