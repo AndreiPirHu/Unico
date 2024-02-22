@@ -51,11 +51,11 @@ export const SearchBar: React.FC<searchBarProps> = ({
         for (let i = 0; i < Math.min(6, filteredProducts.length); i++) {
           const product = filteredProducts[i];
           let newProduct: React.ReactNode = (
-            <div
-              key={product.name}
-              className=" relative cursor-pointer mx-auto  "
-            >
-              <Link to={`/products/${product.name}`}>
+            <div key={product.name} className=" relative cursor-pointer   ">
+              <Link
+                to={`/products/${product.name}`}
+                className="grid justify-center"
+              >
                 <img
                   src={product.images.front}
                   alt=""
@@ -63,11 +63,11 @@ export const SearchBar: React.FC<searchBarProps> = ({
                   onMouseLeave={(e) =>
                     handleImgHoverOut(e, product.images.front)
                   }
-                  className=" md:h-[340px] max-md:max-h-[400px]  "
+                  className=" max-h-[350px]   "
                 />
 
-                <div className=" sm:absolute sm:bottom-0.5 pointer-events-none w-auto ml-3 ">
-                  <h3 className="karantina-light text-3xl max-sm:text-2xl">
+                <div className="   pointer-events-none w-auto ">
+                  <h3 className="karantina-light text-3xl max-lg:text-2xl">
                     {product.name}
                   </h3>
                   <p className=" inline-block text-lg">€</p>
