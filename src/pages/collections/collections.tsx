@@ -63,11 +63,11 @@ export const Collections = () => {
       <Navbar solidBg={true} />
       <div
         id="information-container"
-        className=" grid justify-center mt-10 text-center"
+        className=" grid justify-center mt-10 text-center montserrat-regular"
       >
         <div className="grid justify-center">
-          <h1>{title}</h1>
-          <p className=" text-center text-sm max-w-[800px] mx-10 my-5">
+          <h1 className="text-xl">{title}</h1>
+          <p className=" text-center text-sm max-w-[600px] mx-10 my-5">
             {categoryDescription}
           </p>
         </div>

@@ -254,19 +254,41 @@ export const Navbar: React.FC<navbarProps> = ({
             <h3 className=" text-lg mb-4 text-gray-400">Categories</h3>
             <ul>
               <li className="text-base mb-1 hover:opacity-65">
-                <Link to="/collections/new-arrivals">New Arrivals</Link>
+                <Link
+                  to="/collections/new-arrivals"
+                  onClick={() => setHovered(false)}
+                >
+                  New Arrivals
+                </Link>
               </li>
               <li className="text-base mb-1 hover:opacity-65">
-                <Link to="/collections/all">Shop All</Link>
+                <Link to="/collections/all" onClick={() => setHovered(false)}>
+                  Shop All
+                </Link>
               </li>
               <li className="text-base mb-1 hover:opacity-65">
-                <Link to="/collections/embroidery">Embroidered Tops</Link>
+                <Link
+                  to="/collections/embroidery"
+                  onClick={() => setHovered(false)}
+                >
+                  Embroidered Tops
+                </Link>
               </li>
               <li className="text-base mb-1 hover:opacity-65">
-                <Link to="/collections/crochet">Crocheted Tops</Link>
+                <Link
+                  to="/collections/crochet"
+                  onClick={() => setHovered(false)}
+                >
+                  Crocheted Tops
+                </Link>
               </li>
               <li className="text-base mb-1 hover:opacity-65">
-                <Link to="/collections/stitch">Stitched Tops</Link>
+                <Link
+                  to="/collections/stitch"
+                  onClick={() => setHovered(false)}
+                >
+                  Stitched Tops
+                </Link>
               </li>
             </ul>
           </div>

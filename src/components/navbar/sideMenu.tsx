@@ -57,35 +57,45 @@ export const SideMenu: React.FC<sideMenuProps> = ({
                   : "scale-y-0 opacity-0 "
               }`}
             >
-              <li
-                className="py-3 px-4"
-                onClick={() => setSideMenuActive(false)}
-              >
-                <Link to="/collections/new-arrivals">New Arrivals</Link>
+              <li className="py-3 px-4">
+                <Link
+                  to="/collections/new-arrivals"
+                  onClick={() => setSideMenuActive(false)}
+                >
+                  New Arrivals
+                </Link>
               </li>
-              <li
-                className="py-3 px-4"
-                onClick={() => setSideMenuActive(false)}
-              >
-                <Link to="/collections/all">Shop All</Link>
+              <li className="py-3 px-4">
+                <Link
+                  to="/collections/all"
+                  onClick={() => setSideMenuActive(false)}
+                >
+                  Shop All
+                </Link>
               </li>
-              <li
-                className="py-3 px-4"
-                onClick={() => setSideMenuActive(false)}
-              >
-                <Link to="/collections/embroidery">Embroidered Tops</Link>
+              <li className="py-3 px-4">
+                <Link
+                  to="/collections/embroidery"
+                  onClick={() => setSideMenuActive(false)}
+                >
+                  Embroidered Tops
+                </Link>
               </li>
-              <li
-                className="py-3 px-4"
-                onClick={() => setSideMenuActive(false)}
-              >
-                <Link to="/collections/crochet">Crocheted Tops</Link>
+              <li className="py-3 px-4">
+                <Link
+                  to="/collections/crochet"
+                  onClick={() => setSideMenuActive(false)}
+                >
+                  Crocheted Tops
+                </Link>
               </li>
-              <li
-                className="py-3 px-4"
-                onClick={() => setSideMenuActive(false)}
-              >
-                <Link to="/collections/stitch">Stitched Tops</Link>
+              <li className="py-3 px-4">
+                <Link
+                  to="/collections/stitch"
+                  onClick={() => setSideMenuActive(false)}
+                >
+                  Stitched Tops
+                </Link>
               </li>
             </ul>
           </div>
