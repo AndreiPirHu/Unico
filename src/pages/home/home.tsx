@@ -4,11 +4,10 @@ import { Navbar } from "../../components/navbar/navbar";
 import { ProductList } from "../../components/productList";
 import { RootState } from "../../features/rootReducer";
 import { SiteLoader } from "../../components/siteLoader";
+import { Link } from "react-router-dom";
 
 export const Home = () => {
-  let productsFromRedux: Products = useSelector(
-    (state: RootState) => state.products
-  );
+  const products: Products = useSelector((state: RootState) => state.products);
 
   return (
     <div id="Home" className="overflow-hidden">
@@ -33,19 +32,15 @@ export const Home = () => {
           />
         </picture>
       </div>
-      <div className=" grid justify-items-center my-4 montserrat-regular">
-        <h3 className=" text-base">New Arrivals</h3>
-        <p className=" underline text-gray-700 text-sm  ">View all</p>
-        <p className=" text-center text-xs w-2/4">
-          Elevate your style with our range of exquisite embroidered sweaters.
-          Each piece is adorned with unique embroidery, showcasing a blend of
-          artistry and comfort. Indulge in the luxury of premium materials such
-          as soft cotton and fine merino wool. Explore the entire assortment in
-          our latest arrivals and embrace the art of embroidered knitwear.
+      <div className=" grid justify-items-center my-10 montserrat-regular">
+        <h3 className=" text-lg">New Arrivals</h3>
+
+        <p className=" underline text-gray-700 text-xs mt-2  ">
+          <Link to="/collections/all">View all</Link>
         </p>
       </div>
       <div>
-        <ProductList data={productsFromRedux.products} />
+        <ProductList data={products.products.slice(0, 6)} />
       </div>
       <div className="flex max-h-[760px] mt-9 max-sm:max-h-[400px]">
         <div className=" flex-1 ">

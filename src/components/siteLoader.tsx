@@ -16,7 +16,7 @@ export const SiteLoader = () => {
     setActive(true);
     setTimeout(() => {
       setActive(false);
-    }, 600);
+    }, 700);
   }, [pathname]);
 
   return (
