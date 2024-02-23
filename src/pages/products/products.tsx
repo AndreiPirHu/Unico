@@ -11,7 +11,7 @@ import { actions } from "../../features/cart";
 import { v4 as uuidv4 } from "uuid";
 
 export const Products = () => {
-  const { id } = useParams<{ id: string }>();
+  const { name } = useParams<{ name: string }>();
   const products: Products = useSelector((state: RootState) => state.products);
   const [currentProduct, setCurrentProduct] = useState<Product>();
   const [selectedImage, setSelectedImage] = useState<string | undefined>();
@@ -29,7 +29,9 @@ export const Products = () => {
   const { pathname } = useLocation();
 
   const getCurrentProduct = () => {
-    setCurrentProduct(products.products.find((product) => product.name == id));
+    setCurrentProduct(
+      products.products.find((product) => product.name == name)
+    );
   };
   let hoverTimeout = useRef<number | null>(null);
   const changeImage = (imageUrl: string | undefined) => {

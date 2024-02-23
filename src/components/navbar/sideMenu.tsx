@@ -55,19 +55,19 @@ export const SideMenu: React.FC<sideMenuProps> = ({
               }`}
             >
               <li className="py-3 px-4">
-                <Link to="">New Arrivals</Link>
+                <Link to="/collections/new-arrivals">New Arrivals</Link>
               </li>
               <li className="py-3 px-4">
-                <Link to="">Shop All</Link>
+                <Link to="/collections/all">Shop All</Link>
               </li>
               <li className="py-3 px-4">
-                <Link to="">Embroidered Tops</Link>
+                <Link to="/collections/embroidery">Embroidered Tops</Link>
               </li>
               <li className="py-3 px-4">
-                <Link to="">Crocheted Tops</Link>
+                <Link to="/collections/crochet">Crocheted Tops</Link>
               </li>
               <li className="py-3 px-4">
-                <Link to="">Stitched Tops</Link>
+                <Link to="/collections/stitch">Stitched Tops</Link>
               </li>
             </ul>
           </div>

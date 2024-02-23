@@ -1,7 +1,7 @@
 import { useSelector } from "react-redux";
 import { Footer } from "../../components/footer/footer";
 import { Navbar } from "../../components/navbar/navbar";
-import { ProductList } from "./productList";
+import { ProductList } from "../../components/productList";
 import { RootState } from "../../features/rootReducer";
 import { SiteLoader } from "../../components/siteLoader";
 

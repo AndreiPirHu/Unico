@@ -10,6 +10,7 @@ import { useEffect } from "react";
 import { Products } from "./pages/products/products";
 import ScrollToTop from "./components/scrollToTop";
 import { RootState } from "./features/rootReducer";
+import { Collections } from "./pages/collections/collections";
 
 function App() {
   const cartProducts = useSelector((state: RootState) => state.cart);
@@ -67,7 +68,8 @@ function App() {
         <ScrollToTop />
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/products/:id" element={<Products />} />
+          <Route path="/products/:name" element={<Products />} />
+          <Route path="/collections/:category" element={<Collections />} />
         </Routes>
       </Router>
     </>

@@ -254,19 +254,19 @@ export const Navbar: React.FC<navbarProps> = ({
             <h3 className=" text-lg mb-4 text-gray-400">Categories</h3>
             <ul>
               <li className="text-base mb-1 hover:opacity-65">
-                <Link to="">New Arrivals</Link>
+                <Link to="/collections/new-arrivals">New Arrivals</Link>
               </li>
               <li className="text-base mb-1 hover:opacity-65">
-                <Link to="">Shop All</Link>
+                <Link to="/collections/all">Shop All</Link>
               </li>
               <li className="text-base mb-1 hover:opacity-65">
-                <Link to="">Embroidered Tops</Link>
+                <Link to="/collections/embroidery">Embroidered Tops</Link>
               </li>
               <li className="text-base mb-1 hover:opacity-65">
-                <Link to="">Crocheted Tops</Link>
+                <Link to="/collections/crochet">Crocheted Tops</Link>
               </li>
               <li className="text-base mb-1 hover:opacity-65">
-                <Link to="">Stitched Tops</Link>
+                <Link to="/collections/stitch">Stitched Tops</Link>
               </li>
             </ul>
           </div>
