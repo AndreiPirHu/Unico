@@ -28,8 +28,10 @@ export const SearchBar: React.FC<searchBarProps> = ({
 
   const searchProducts = (searchQuery: string) => {
     if (searchQuery.length > 2) {
-      const filteredProducts = products.filter((product) =>
-        product.name.toLowerCase().includes(searchQuery.toLowerCase())
+      const filteredProducts = products.filter(
+        (product) =>
+          product.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          product.type.includes(searchQuery.toLowerCase())
       );
       createNodeList(filteredProducts);
     } else {

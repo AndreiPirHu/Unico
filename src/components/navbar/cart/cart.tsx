@@ -10,7 +10,9 @@ export const Cart: React.FC<cartProps> = ({ cartActive, setCartActive }) => {
   return (
     <menu
       className={`fixed w-full h-full flex z-50 bg-[rgba(0,0,0,.3)] transition-all  ${
-        cartActive ? " opacity-100" : " opacity-0 pointer-events-none"
+        cartActive
+          ? " opacity-100"
+          : " opacity-0 pointer-events-none duration-[1200ms]"
       }`}
     >
       <div

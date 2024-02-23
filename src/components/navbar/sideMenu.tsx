@@ -11,10 +11,13 @@ export const SideMenu: React.FC<sideMenuProps> = ({
   setSideMenuActive,
 }) => {
   const [shopExpanded, setShopExpanded] = useState<boolean>(false);
+
   return (
     <menu
       className={`fixed w-full h-full bg-[rgba(0,0,0,.3)] flex z-50 transition-all  ${
-        sideMenuActive ? " opacity-100" : "opacity-0 pointer-events-none"
+        sideMenuActive
+          ? " opacity-100"
+          : "opacity-0 pointer-events-none duration-[1200ms]"
       } `}
     >
       <div
@@ -54,19 +57,34 @@ export const SideMenu: React.FC<sideMenuProps> = ({
                   : "scale-y-0 opacity-0 "
               }`}
             >
-              <li className="py-3 px-4">
+              <li
+                className="py-3 px-4"
+                onClick={() => setSideMenuActive(false)}
+              >
                 <Link to="/collections/new-arrivals">New Arrivals</Link>
               </li>
-              <li className="py-3 px-4">
+              <li
+                className="py-3 px-4"
+                onClick={() => setSideMenuActive(false)}
+              >
                 <Link to="/collections/all">Shop All</Link>
               </li>
-              <li className="py-3 px-4">
+              <li
+                className="py-3 px-4"
+                onClick={() => setSideMenuActive(false)}
+              >
                 <Link to="/collections/embroidery">Embroidered Tops</Link>
               </li>
-              <li className="py-3 px-4">
+              <li
+                className="py-3 px-4"
+                onClick={() => setSideMenuActive(false)}
+              >
                 <Link to="/collections/crochet">Crocheted Tops</Link>
               </li>
-              <li className="py-3 px-4">
+              <li
+                className="py-3 px-4"
+                onClick={() => setSideMenuActive(false)}
+              >
                 <Link to="/collections/stitch">Stitched Tops</Link>
               </li>
             </ul>
