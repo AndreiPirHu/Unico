@@ -1,6 +1,6 @@
 import { Link, useNavigate } from "react-router-dom";
 import { CartProductList } from "../../components/navbar/cart/cartProductList";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { SiteLoader } from "../../components/siteLoader";
 
 export const Checkout = () => {
@@ -17,8 +17,18 @@ export const Checkout = () => {
     instabox: 6,
   };
 
+  const handleInformationDone = (event: React.SyntheticEvent) => {
+    event.preventDefault();
+    setInformationDone(!informationDone);
+  };
+
   const handleGoBack = () => {
     navigate(-1);
+  };
+
+  const handlePurchaseCompleted = (event: React.SyntheticEvent) => {
+    event.preventDefault();
+    navigate("/checkout/completed");
   };
 
   useEffect(() => {
@@ -56,7 +66,7 @@ export const Checkout = () => {
       </div>
 
       <div id="title-container" className="flex justify-center py-8 ">
-        <h1 className="text-2xl font-medium">Checkout</h1>
+        <h1 className="text-3xl font-medium">Checkout</h1>
       </div>
 
       <div id="section-container" className="grid justify-center gap-10 ">
@@ -90,7 +100,7 @@ export const Checkout = () => {
             <div className="w-[500px] max-sm:w-[90vw]  ">
               <form
                 id="information-form"
-                onSubmit={() => setInformationDone(!informationDone)}
+                onSubmit={(e) => handleInformationDone(e)}
                 className="grid  gap-1"
               >
                 <h2 className="mt-8">Delivery information</h2>
@@ -166,7 +176,7 @@ export const Checkout = () => {
           </div>
           <div
             id="delivery-content"
-            className={`lg:w-[970px] md:w-[730px] max-md:w-screen bg-white grid justify-center py-4 transition-all duration-500 origin-top ${
+            className={`lg:w-[970px] md:w-[730px] max-md:w-screen bg-white grid justify-center py-4 pb-8 transition-all duration-500 origin-top ${
               informationDone
                 ? "scale-y-100 opacity-100 "
                 : "scale-y-0 h-0 opacity-0"
@@ -322,7 +332,7 @@ export const Checkout = () => {
             }`}
           >
             <div className=" w-[500px] max-sm:w-[90vw] grid  my-4 ">
-              <form action="">
+              <form onSubmit={(e) => handlePurchaseCompleted(e)}>
                 <div className="flex justify-center my-2">
                   <h2 className="text-2xl font-semibold">
                     Choose payment method

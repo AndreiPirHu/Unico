@@ -12,6 +12,7 @@ import ScrollToTop from "./components/scrollToTop";
 import { RootState } from "./features/rootReducer";
 import { Collections } from "./pages/collections/collections";
 import { Checkout } from "./pages/checkout/checkout";
+import { Completed } from "./pages/completed/completed";
 
 function App() {
   const cartProducts = useSelector((state: RootState) => state.cart);
@@ -72,6 +73,7 @@ function App() {
           <Route path="/products/:name" element={<Products />} />
           <Route path="/collections/:category" element={<Collections />} />
           <Route path="/checkout" element={<Checkout />} />
+          <Route path="/checkout/completed" element={<Completed />} />
         </Routes>
       </Router>
     </>
