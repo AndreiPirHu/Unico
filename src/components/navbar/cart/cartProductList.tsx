@@ -7,10 +7,12 @@ import { useNavigate } from "react-router-dom";
 
 type CartProductListProps = {
   setTotalAmount: React.Dispatch<React.SetStateAction<number>>;
+  setCartEmpty?: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 export const CartProductList: React.FC<CartProductListProps> = ({
   setTotalAmount,
+  setCartEmpty,
 }) => {
   const [productNodeList, setProductNodeList] = useState<React.ReactNode[]>([]);
   const [groupedCartProducts, setGroupedCartProducts] = useState<{
@@ -157,6 +159,11 @@ export const CartProductList: React.FC<CartProductListProps> = ({
 
   useEffect(() => {
     createGroupedCartProducts();
+    if (cartProducts.length == 0 && setCartEmpty) {
+      setCartEmpty(true);
+    } else if (setCartEmpty && cartProducts.length > 0) {
+      setCartEmpty(false);
+    }
   }, [cartProducts]);
 
   useEffect(() => {

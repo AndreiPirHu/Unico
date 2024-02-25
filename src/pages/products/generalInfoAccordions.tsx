@@ -42,7 +42,7 @@ export const GeneralInfoAccordions = () => {
         >
           <li className="mt-3">
             <p>
-              Standard delivery: Free shipping on purchases over 100 Euro, 3-5
+              Standard delivery: Free shipping on purchases over 150 Euro, 3-5
               working days. Read more about delivery here.
             </p>
           </li>
