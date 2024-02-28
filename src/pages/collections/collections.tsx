@@ -20,7 +20,7 @@ export const Collections = () => {
 
   const getDescription = (category: string) => {
     return {
-      all: "Embark on a journey of sartorial excellence with our meticulously curated collection, featuring a harmonious blend of crocheted, embroidered, and stitched tops. Each piece is a symphony of craftsmanship, meticulously crafted to elevate your style with timeless elegance and sophistication.",
+      all: "Embark on a journey of sartorial excellence with our curated collection, featuring a harmonious blend of crocheted, embroidered, and stitched tops. Each piece is a symphony of craftsmanship, meticulously crafted to elevate your style with timeless elegance and sophistication.",
       "new-arrivals":
         "Introducing our latest arrivals, a captivating ensemble of sartorial wonders designed to ignite your sense of style and elevate your wardrobe to new heights. Immerse yourself in a world of timeless elegance and modern sophistication as you explore our meticulously curated collection, brimming with exquisite pieces that exude charm and refinement.",
       embroidery:

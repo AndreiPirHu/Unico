@@ -33,9 +33,9 @@ export const Home = () => {
         </picture>
       </div>
       <div className=" grid justify-items-center my-10 montserrat-regular">
-        <h3 className=" text-lg">New Arrivals</h3>
+        <h3 className=" text-3xl">New Arrivals</h3>
 
-        <p className=" underline text-gray-700 text-xs mt-2  ">
+        <p className=" underline font-medium text-gray-700 text-lg mt-2 hover:opacity-75 ">
           <Link to="/collections/all">View all</Link>
         </p>
       </div>
