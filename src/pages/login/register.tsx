@@ -1,31 +1,28 @@
 import { useEffect, useState } from "react";
 import { Footer } from "../../components/footer/footer";
 import { Navbar } from "../../components/navbar/navbar";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { auth } from "../../firebase";
-import { signInWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword } from "firebase/auth";
 import { SiteLoader } from "../../components/siteLoader";
 
-export const Login = () => {
+export const Register = () => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
+  const [firstName, setFirstName] = useState<string>("");
+  const [lastName, setLastName] = useState<string>("");
   const [passwordVisible, setPasswordVisible] = useState<boolean>(false);
 
   const navigate = useNavigate();
 
-  const handleSignIn = async (event: React.SyntheticEvent) => {
+  const handleRegister = async (event: React.SyntheticEvent) => {
     event.preventDefault();
     try {
-      await signInWithEmailAndPassword(auth, email, password);
-
+      await createUserWithEmailAndPassword(auth, email, password);
       navigate("/account");
     } catch (error) {
       console.log(error);
     }
-  };
-
-  const navigateToRegister = () => {
-    navigate("/register");
   };
 
   useEffect(() => {
@@ -41,10 +38,28 @@ export const Login = () => {
       <Navbar solidBg={true} />
       <div className="grid justify-center py-5 montserrat-regular ">
         <form
-          onSubmit={handleSignIn}
+          onSubmit={handleRegister}
           className=" flex flex-col justify-center w-[500px]  text-center p-10 "
         >
-          <h1 className="text-base">Login</h1>
+          <h1 className="text-base">Register</h1>
+          <div className="text-start pt-7 pb-3 ">
+            <h2 className="text-xs font-semibold">First Name</h2>
+          </div>
+          <input
+            type="text"
+            className="border px-5 py-3 rounded-sm"
+            onChange={(e) => setFirstName(e.target.value)}
+            required
+          />
+          <div className="text-start pt-7 pb-3 ">
+            <h2 className="text-xs font-semibold">Last Name</h2>
+          </div>
+          <input
+            type="text"
+            className="border px-5 py-3 rounded-sm"
+            onChange={(e) => setLastName(e.target.value)}
+            required
+          />
           <div className="text-start pt-7 pb-3 ">
             <h2 className="text-xs font-semibold">Email</h2>
           </div>
@@ -78,14 +93,17 @@ export const Login = () => {
             type="submit"
             className="text-white text-sm bg-black mt-8 py-5 rounded-sm hover:opacity-75 font-semibolds"
           >
-            Sign in
+            Create Account
           </button>
-          <button
-            onClick={navigateToRegister}
-            className="text-black text-sm bg-white border border-black mt-5 py-5 rounded-sm hover:opacity-75 font-semibold"
-          >
-            Register
-          </button>
+          <div className="flex pt-3">
+            <h3 className="text-base">Already have an account?</h3>
+            <Link
+              to="/login"
+              className="text-base font-semibold pl-2 underline underline-offset-2 cursor-pointer hover:opacity-75"
+            >
+              Sign in
+            </Link>
+          </div>
         </form>
       </div>
       <Footer />
