@@ -2,6 +2,9 @@ import { Link, useNavigate } from "react-router-dom";
 import { CartProductList } from "../../components/navbar/cart/cartProductList";
 import React, { useEffect, useState } from "react";
 import { SiteLoader } from "../../components/siteLoader";
+import { v4 as uuidv4 } from "uuid";
+import { useDispatch } from "react-redux";
+import { actions } from "../../features/order";
 
 export const Checkout = () => {
   const [totalAmount, setTotalAmount] = useState<number>(0);
@@ -10,6 +13,8 @@ export const Checkout = () => {
   const [informationDone, setInformationDone] = useState<boolean>(false);
   const [cartEmpty, setCartEmpty] = useState<boolean>(false);
   const navigate = useNavigate();
+
+  const dispatch = useDispatch();
 
   const deliveryCost: { [key: string]: number } = {
     postnord: 3,
@@ -28,7 +33,9 @@ export const Checkout = () => {
 
   const handlePurchaseCompleted = (event: React.SyntheticEvent) => {
     event.preventDefault();
-    navigate("/checkout/completed");
+    const orderID = uuidv4().slice(0, 13);
+    dispatch(actions.storeOrderID(orderID));
+    navigate("/checkout/completed/" + orderID);
   };
 
   useEffect(() => {

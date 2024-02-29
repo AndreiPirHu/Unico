@@ -53,7 +53,7 @@ export const Navbar: React.FC<navbarProps> = ({
       setTimeout(() => {
         setCartActive(false);
         setProductAdded(false);
-      }, 1000);
+      }, 600);
     }
   }, [productAdded]);
 

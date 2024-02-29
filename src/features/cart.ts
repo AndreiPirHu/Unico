@@ -1,12 +1,15 @@
 import { createAction, createReducer } from "@reduxjs/toolkit";
 
 const addToCart = createAction<CartProduct>("Adds a product to cart");
+
 const removeFromCart = createAction<CartProduct>(
   "Removes an item from cart based on id"
 );
+
 const removeSeveralFromCart = createAction<{ name: string; size: string }>(
   "Removes all items with the same name and size from cart"
 );
+
 const clearCart = createAction("Clears the cart of all items");
 
 const actions = { addToCart, removeFromCart, clearCart, removeSeveralFromCart };

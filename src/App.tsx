@@ -73,7 +73,7 @@ function App() {
           <Route path="/products/:name" element={<Products />} />
           <Route path="/collections/:category" element={<Collections />} />
           <Route path="/checkout" element={<Checkout />} />
-          <Route path="/checkout/completed" element={<Completed />} />
+          <Route path="/checkout/completed/:orderID" element={<Completed />} />
         </Routes>
       </Router>
     </>
