@@ -13,6 +13,7 @@ import { RootState } from "./features/rootReducer";
 import { Collections } from "./pages/collections/collections";
 import { Checkout } from "./pages/checkout/checkout";
 import { Completed } from "./pages/completed/completed";
+import { Login } from "./pages/login/login";
 
 function App() {
   const cartProducts = useSelector((state: RootState) => state.cart);
@@ -72,6 +73,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/products/:name" element={<Products />} />
           <Route path="/collections/:category" element={<Collections />} />
+          <Route path="login" element={<Login />} />
           <Route path="/checkout" element={<Checkout />} />
           <Route path="/checkout/completed/:orderID" element={<Completed />} />
         </Routes>

@@ -157,13 +157,15 @@ export const Navbar: React.FC<navbarProps> = ({
           </Link>
         </div>
         <div className="flex flex-1 justify-end my-auto mr-10 max-md:mr-5 ">
-          <img
-            src="/src/assets/account-icon.svg"
-            alt=""
-            className={` inline cursor-pointer h-11 p-2  md:hidden ${
-              scrollPosition || hovered ? "" : "invert "
-            }`}
-          />
+          <Link to="/login">
+            <img
+              src="/src/assets/account-icon.svg"
+              alt=""
+              className={` inline cursor-pointer h-11 p-2  md:hidden ${
+                scrollPosition || hovered ? "" : "invert "
+              }`}
+            />
+          </Link>
           <div className="relative">
             <img
               src="/src/assets/basket-icon.svg"
@@ -182,7 +184,7 @@ export const Navbar: React.FC<navbarProps> = ({
             )}
           </div>
 
-          <Link to="" className={`group mr-5  my-auto max-md:hidden `}>
+          <Link to="/login" className={`group mr-5  my-auto max-md:hidden `}>
             Account
             <span
               className={`block h-0.5 ${

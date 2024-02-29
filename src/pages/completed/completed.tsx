@@ -19,12 +19,11 @@ export const Completed = () => {
   };
 
   useEffect(() => {
-    //check if the id is correct
     if (orderID !== correctID) {
       navigate("/");
     }
 
-    ///send order to firebase?
+    ///send order to firebase if logged in?
     //clear cart
     dispatch(actions.clearCart());
   }, []);
