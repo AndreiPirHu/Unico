@@ -2,9 +2,10 @@ import { useEffect, useState } from "react";
 import { Footer } from "../../components/footer/footer";
 import { Navbar } from "../../components/navbar/navbar";
 import { Link, useNavigate } from "react-router-dom";
-import { auth } from "../../firebase";
+import { auth, db } from "../../firebase";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { SiteLoader } from "../../components/siteLoader";
+import { doc, setDoc } from "firebase/firestore";
 
 export const Register = () => {
   const [email, setEmail] = useState<string>("");
@@ -18,18 +19,40 @@ export const Register = () => {
   const handleRegister = async (event: React.SyntheticEvent) => {
     event.preventDefault();
     try {
-      await createUserWithEmailAndPassword(auth, email, password);
+      const { user } = await createUserWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+
+      await handleSaveNameToDb(user.uid);
+
       navigate("/account");
     } catch (error) {
       console.log(error);
     }
   };
 
-  useEffect(() => {
-    //redirect to account if logged in
-    if (auth.currentUser) {
-      navigate("/account");
+  const handleSaveNameToDb = async (uid: string) => {
+    try {
+      await setDoc(doc(db, "users", uid), {
+        firstName: firstName,
+        lastName: lastName,
+      });
+    } catch (error) {
+      console.log(error);
     }
+  };
+
+  useEffect(() => {
+    //checks if user is logged in
+    const unsubscribe = auth.onAuthStateChanged((user) => {
+      if (user) {
+        navigate("/account");
+      }
+    });
+
+    return () => unsubscribe();
   }, []);
 
   return (

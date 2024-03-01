@@ -22,9 +22,6 @@ export const Completed = () => {
     if (orderID !== correctID) {
       navigate("/");
     }
-
-    ///send order to firebase if logged in?
-    //clear cart
     dispatch(actions.clearCart());
   }, []);
 

@@ -3,15 +3,30 @@ import { CartProductList } from "../../components/navbar/cart/cartProductList";
 import React, { useEffect, useState } from "react";
 import { SiteLoader } from "../../components/siteLoader";
 import { v4 as uuidv4 } from "uuid";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { actions } from "../../features/order";
+import { auth, db } from "../../firebase";
+import { doc, setDoc, updateDoc } from "firebase/firestore";
+import { RootState } from "../../features/rootReducer";
 
 export const Checkout = () => {
+  const [userInformation, setUserInformation] = useState({
+    firstName: "",
+    lastName: "",
+    address: "",
+    city: "",
+    postalCode: "",
+    email: "",
+    phoneNumber: "",
+  });
   const [totalAmount, setTotalAmount] = useState<number>(0);
   const [chosenDeliveryCost, setChosenDeliveryCost] = useState<number>(0);
+  const [chosenDelivery, setChosenDelivery] = useState<string>("");
   const [chosenPaymentMethod, setChosenPaymentMethod] = useState<string>("");
   const [informationDone, setInformationDone] = useState<boolean>(false);
   const [cartEmpty, setCartEmpty] = useState<boolean>(false);
+  const [currentDate, setCurrentDate] = useState<string>("");
+  const cart = useSelector((state: RootState) => state.cart);
   const navigate = useNavigate();
 
   const dispatch = useDispatch();
@@ -31,10 +46,58 @@ export const Checkout = () => {
     navigate(-1);
   };
 
+  const getCurrentDate = () => {
+    const currentDate = new Date();
+
+    const year = currentDate.getFullYear();
+    const month = (currentDate.getMonth() + 1).toString().padStart(2, "0");
+    const day = currentDate.getDate().toString().padStart(2, "0");
+
+    const formattedDate = `${year}-${month}-${day}`;
+    setCurrentDate(formattedDate);
+  };
+
+  const handleUploadOrderToFirebase = async (uid: string, orderID: string) => {
+    try {
+      //set order info
+      await setDoc(doc(db, "users", uid, "orderHistory", orderID), {
+        date: currentDate,
+        orderID: orderID,
+        payment: chosenPaymentMethod,
+        delivery: chosenDelivery,
+        deliveryCost: chosenDeliveryCost,
+        totalAmount: totalAmount,
+        firstName: userInformation.firstName,
+        lastName: userInformation.lastName,
+        address: userInformation.address,
+        city: userInformation.city,
+        postalCode: userInformation.postalCode,
+        email: userInformation.email,
+        phoneNumber: userInformation.phoneNumber,
+        order: cart,
+      });
+
+      //update user info
+      await updateDoc(doc(db, "users", uid), {
+        address: userInformation.address,
+        city: userInformation.city,
+        postalCode: userInformation.postalCode,
+        phoneNumber: userInformation.phoneNumber,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   const handlePurchaseCompleted = (event: React.SyntheticEvent) => {
     event.preventDefault();
     const orderID = uuidv4().slice(0, 13);
     dispatch(actions.storeOrderID(orderID));
+    //upload to firestore if logged in
+    if (auth.currentUser) {
+      handleUploadOrderToFirebase(auth.currentUser.uid, orderID);
+    }
+
     navigate("/checkout/completed/" + orderID);
   };
 
@@ -43,6 +106,10 @@ export const Checkout = () => {
       navigate("/");
     }
   }, [cartEmpty]);
+
+  useEffect(() => {
+    getCurrentDate();
+  }, []);
 
   return (
     <div className="montserrat-regular relative bg-[#F7F7F7] pb-20  ">
@@ -117,6 +184,12 @@ export const Checkout = () => {
                     placeholder="Name*"
                     className="w-[50%] border p-3 pt-5"
                     required
+                    onChange={(e) =>
+                      setUserInformation({
+                        ...userInformation,
+                        ["firstName"]: e.target.value,
+                      })
+                    }
                     disabled={informationDone}
                   />
                   <input
@@ -124,6 +197,12 @@ export const Checkout = () => {
                     placeholder="Last name*"
                     className="w-[50%] border p-3 pt-5"
                     required
+                    onChange={(e) =>
+                      setUserInformation({
+                        ...userInformation,
+                        ["lastName"]: e.target.value,
+                      })
+                    }
                     disabled={informationDone}
                   />
                 </div>
@@ -132,6 +211,12 @@ export const Checkout = () => {
                   placeholder="Address*"
                   className="border p-3 pt-5"
                   required
+                  onChange={(e) =>
+                    setUserInformation({
+                      ...userInformation,
+                      ["address"]: e.target.value,
+                    })
+                  }
                   disabled={informationDone}
                 />
                 <div id="city-input" className="flex max-sm:w-[90vw]">
@@ -140,6 +225,12 @@ export const Checkout = () => {
                     placeholder="City*"
                     className="w-[50%] border p-3 pt-5"
                     required
+                    onChange={(e) =>
+                      setUserInformation({
+                        ...userInformation,
+                        ["city"]: e.target.value,
+                      })
+                    }
                     disabled={informationDone}
                   />
                   <input
@@ -147,6 +238,12 @@ export const Checkout = () => {
                     placeholder="Postal Code*"
                     className="w-[50%]  border p-3 pt-5"
                     required
+                    onChange={(e) =>
+                      setUserInformation({
+                        ...userInformation,
+                        ["postalCode"]: e.target.value,
+                      })
+                    }
                     disabled={informationDone}
                   />
                 </div>
@@ -157,6 +254,12 @@ export const Checkout = () => {
                   placeholder="Email*"
                   className="border p-3 pt-5"
                   required
+                  onChange={(e) =>
+                    setUserInformation({
+                      ...userInformation,
+                      ["email"]: e.target.value,
+                    })
+                  }
                   disabled={informationDone}
                 />
                 <input
@@ -164,6 +267,12 @@ export const Checkout = () => {
                   placeholder="Phone Number*"
                   className="border p-3 pt-5"
                   required
+                  onChange={(e) =>
+                    setUserInformation({
+                      ...userInformation,
+                      ["phoneNumber"]: e.target.value,
+                    })
+                  }
                   disabled={informationDone}
                 />
                 <button
@@ -212,9 +321,10 @@ export const Checkout = () => {
                       type="radio"
                       name="delivery"
                       className=" w-5 h-5 mx-1 accent-black"
-                      onChange={() =>
-                        setChosenDeliveryCost(deliveryCost.postnord)
-                      }
+                      onChange={() => {
+                        setChosenDeliveryCost(deliveryCost.postnord);
+                        setChosenDelivery("postnord");
+                      }}
                     />
                   </div>
 
@@ -252,7 +362,10 @@ export const Checkout = () => {
                       type="radio"
                       name="delivery"
                       className=" w-5 h-5 mx-1 accent-black"
-                      onChange={() => setChosenDeliveryCost(deliveryCost.DHL)}
+                      onChange={() => {
+                        setChosenDeliveryCost(deliveryCost.DHL);
+                        setChosenDelivery("DHL");
+                      }}
                     />
                   </div>
 
@@ -294,9 +407,10 @@ export const Checkout = () => {
                       type="radio"
                       name="delivery"
                       className=" w-5 h-5 mx-1 accent-black"
-                      onChange={() =>
-                        setChosenDeliveryCost(deliveryCost.instabox)
-                      }
+                      onChange={() => {
+                        setChosenDeliveryCost(deliveryCost.instabox);
+                        setChosenDelivery("instabox");
+                      }}
                     />
                   </div>
 

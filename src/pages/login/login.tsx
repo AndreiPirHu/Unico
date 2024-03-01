@@ -29,10 +29,14 @@ export const Login = () => {
   };
 
   useEffect(() => {
-    //redirect to account if logged in
-    if (auth.currentUser) {
-      navigate("/account");
-    }
+    //checks if user is logged in
+    const unsubscribe = auth.onAuthStateChanged((user) => {
+      if (user) {
+        navigate("/account");
+      }
+    });
+
+    return () => unsubscribe();
   }, []);
 
   return (
