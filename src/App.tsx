@@ -18,6 +18,7 @@ import { Account } from "./pages/account/account";
 import { Register } from "./pages/login/register";
 import { auth, db } from "./firebase";
 import { doc, getDoc, updateDoc } from "firebase/firestore";
+import { Error } from "./pages/error/error";
 
 function App() {
   const cartProducts = useSelector((state: RootState) => state.cart);
@@ -118,6 +119,7 @@ function App() {
           <Route path="/account" element={<Account />} />
           <Route path="/checkout" element={<Checkout />} />
           <Route path="/checkout/completed/:orderID" element={<Completed />} />
+          <Route path="*" element={<Error />} />
         </Routes>
       </Router>
     </>
