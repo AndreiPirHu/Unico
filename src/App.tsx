@@ -16,6 +16,8 @@ import { Completed } from "./pages/completed/completed";
 import { Login } from "./pages/login/login";
 import { Account } from "./pages/account/account";
 import { Register } from "./pages/login/register";
+import { auth, db } from "./firebase";
+import { doc, getDoc, updateDoc } from "firebase/firestore";
 
 function App() {
   const cartProducts = useSelector((state: RootState) => state.cart);
@@ -52,19 +54,55 @@ function App() {
     }
   };
 
+  const getCartProductsFirebase = async (uid: string) => {
+    const data = await getDoc(doc(db, "users", uid));
+    const userData = data.data();
+
+    dispatch(cartActions.clearCart());
+    if (userData) {
+      for (let cartItem of userData.cart) {
+        dispatch(cartActions.addToCart(cartItem));
+      }
+    }
+  };
+
   const updateLocalStorageCart = () => {
     localStorage.setItem("cartItems", JSON.stringify(cartProducts));
   };
 
+  const updateFirebaseCart = async (uid: string) => {
+    await updateDoc(doc(db, "users", uid), { cart: cartProducts });
+  };
+
   useEffect(() => {
-    setTimeout(() => {
-      updateLocalStorageCart();
-    }, 100);
+    //checks if user is logged in
+
+    if (auth.currentUser) {
+      //send to firebase
+      setTimeout(() => {
+        updateFirebaseCart(auth.currentUser!.uid);
+      }, 100);
+    } else {
+      setTimeout(() => {
+        updateLocalStorageCart();
+      }, 100);
+    }
   }, [cartProducts]);
 
   useEffect(() => {
     getProductsFromDatabase();
-    getCartProducts();
+
+    //checks if user is logged in
+    const unsubscribe = auth.onAuthStateChanged((user) => {
+      if (user) {
+        //get from firebase
+        getCartProductsFirebase(user.uid);
+      } else {
+        getCartProducts();
+      }
+    });
+
+    return () => unsubscribe();
   }, []);
 
   return (

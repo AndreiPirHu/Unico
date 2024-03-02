@@ -5,7 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { auth, db } from "../../firebase";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { SiteLoader } from "../../components/siteLoader";
-import { doc, setDoc } from "firebase/firestore";
+import { arrayUnion, doc, setDoc, updateDoc } from "firebase/firestore";
 
 export const Register = () => {
   const [email, setEmail] = useState<string>("");
@@ -15,6 +15,25 @@ export const Register = () => {
   const [passwordVisible, setPasswordVisible] = useState<boolean>(false);
 
   const navigate = useNavigate();
+
+  const handleCartsSync = async (uid: string) => {
+    let offlineCart = [];
+
+    //get current localstorage cart
+    const offlineCartString = localStorage.getItem("cartItems");
+
+    if (offlineCartString) {
+      offlineCart = JSON.parse(offlineCartString);
+    }
+
+    //send cart to firebase by adding to the current online cart array and not overwriting
+    await updateDoc(doc(db, "users", uid), {
+      ["cart"]: arrayUnion(...offlineCart),
+    });
+
+    //clears the offline cart
+    localStorage.removeItem("cartItems");
+  };
 
   const handleRegister = async (event: React.SyntheticEvent) => {
     event.preventDefault();
@@ -26,6 +45,8 @@ export const Register = () => {
       );
 
       await handleSaveNameToDb(user.uid);
+
+      await handleCartsSync(user.uid);
 
       navigate("/account");
     } catch (error) {
@@ -62,7 +83,7 @@ export const Register = () => {
       <div className="grid justify-center py-5 montserrat-regular ">
         <form
           onSubmit={handleRegister}
-          className=" flex flex-col justify-center w-[500px]  text-center p-10 "
+          className=" flex flex-col justify-center w-[500px] max-sm:w-[400px] max-[450px]:w-[350px]  text-center p-10 "
         >
           <h1 className="text-base">Register</h1>
           <div className="text-start pt-7 pb-3 ">

@@ -72,10 +72,15 @@ export const AccountInfo = () => {
   }, []);
 
   return (
-    <div>
-      <form className=" flex flex-col justify-center w-[500px]  text-center p-10 ">
-        <h1 className="text-base">Account Information</h1>
-        <div className="text-start pt-7 pb-3 ">
+    <div className=" max-sm:flex max-sm:flex-col ">
+      <div id="header" className="border-b-2 mb-10 ">
+        <h1 className="text-xl font-semibold  ">Account Information</h1>
+        <h2 className="text-base text-gray-700 pt-2 pb-5">
+          Update your information
+        </h2>
+      </div>
+      <form className=" flex flex-col justify-center w-[500px] max-sm:mx-auto  max-md:w-[390px] max-[470px]:w-[100%] max-[470px]:pr-5  text-center  ">
+        <div className="text-start  pb-3 ">
           <h2 className="text-xs font-semibold">First Name</h2>
         </div>
         <input
@@ -115,6 +120,7 @@ export const AccountInfo = () => {
         <input
           type="email"
           className="border px-5 py-2 rounded-sm"
+          value={userInformation.email}
           onChange={(e) => {
             setUserInformation({
               ...userInformation,

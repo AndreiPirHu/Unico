@@ -7,7 +7,7 @@ const actions = { storeOrderID };
 const initialState: string = "";
 
 const reducer = createReducer(initialState, (builder) => {
-  builder.addCase(storeOrderID, (state, action) => {
+  builder.addCase(storeOrderID, (_, action) => {
     return action.payload;
   });
 });
