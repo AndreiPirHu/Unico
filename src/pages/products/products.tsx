@@ -9,6 +9,7 @@ import { SiteLoader } from "../../components/siteLoader";
 import { GeneralInfoAccordions } from "./generalInfoAccordions";
 import { actions } from "../../features/cart";
 import { v4 as uuidv4 } from "uuid";
+import { Error } from "../error/error";
 
 export const Products = () => {
   const { name } = useParams<{ name: string }>();
@@ -25,6 +26,7 @@ export const Products = () => {
   const [cartButtonValue, setCartButtonValue] = useState<string>("Add to Cart");
   const [buyIsVisible, setBuyIsVisible] = useState<boolean>(false);
   const [productAdded, setProductAdded] = useState<boolean>(false);
+  const [productExists, setProductExists] = useState<boolean>(true);
 
   const { pathname } = useLocation();
 
@@ -33,6 +35,7 @@ export const Products = () => {
       products.products.find((product) => product.name == name)
     );
   };
+
   let hoverTimeout = useRef<number | null>(null);
   const changeImage = (imageUrl: string | undefined) => {
     setSelectedImage(imageUrl);
@@ -115,6 +118,11 @@ export const Products = () => {
   useEffect(() => {
     setSelectedImage(currentProduct?.images.front);
     createPicturesNodeList();
+    if (currentProduct) {
+      setProductExists(true);
+    } else {
+      setProductExists(false);
+    }
   }, [currentProduct]);
 
   useEffect(() => {
@@ -141,164 +149,172 @@ export const Products = () => {
     };
   }, []);
 
-  return (
-    <div>
-      <SiteLoader />
-      {ProductImagesModalActive ? (
-        <ProductImagesModal
-          selectedImage={selectedImage}
-          setProductImagesModalActive={setProductImagesModalActive}
-          picturesNodeList={picturesNodeList}
-        />
-      ) : (
-        ""
-      )}
-
-      <Navbar
-        solidBg={true}
-        productAdded={productAdded}
-        setProductAdded={setProductAdded}
-      />
-      <div className="grid grid-cols-2 my-16 px-9  max-md:grid-cols-1">
-        <div className="grid justify-center">
-          <img
-            src={selectedImage}
-            alt="picture of clothing product"
-            className=" max-h-[600px] cursor-pointer"
-            onClick={() => {
-              setProductImagesModalActive(true);
-            }}
+  if (productExists) {
+    return (
+      <div>
+        <SiteLoader />
+        {ProductImagesModalActive ? (
+          <ProductImagesModal
+            selectedImage={selectedImage}
+            setProductImagesModalActive={setProductImagesModalActive}
+            picturesNodeList={picturesNodeList}
           />
-          <div className="flex gap-2 my-5 max-w-[400px] overflow-scroll">
-            {picturesNodeList}
+        ) : (
+          ""
+        )}
+
+        <Navbar
+          solidBg={true}
+          productAdded={productAdded}
+          setProductAdded={setProductAdded}
+        />
+        <div className="grid grid-cols-2 my-16 px-9  max-md:grid-cols-1">
+          <div className="grid justify-center">
+            <img
+              src={selectedImage}
+              alt="picture of clothing product"
+              className=" max-h-[600px] cursor-pointer"
+              onClick={() => {
+                setProductImagesModalActive(true);
+              }}
+            />
+            <div className="flex gap-2 my-5 max-w-[400px] overflow-scroll">
+              {picturesNodeList}
+            </div>
+          </div>
+          <div className="md:pl-10 lg:mr-[15%]">
+            <div className="montserrat-regular">
+              <h1 className=" text-2xl ">{currentProduct?.name}</h1>
+              <h2 className=" text-xl my-1">€{currentProduct?.price}</h2>
+              <span className=" block h-px bg-gray-400 my-5  "></span>
+              <h3 className="text-sm montserrat-bold">Size</h3>
+              <div className=" flex flex-wrap gap-2 my-3">
+                <button
+                  className={`w-10 h-10 rounded-sm border hover:border-gray-800 text-sm ${
+                    chosenSize == "XS" ? "border-gray-800" : " "
+                  }`}
+                  onClick={() => setChosenSize("XS")}
+                >
+                  XS
+                </button>
+                <button
+                  className={`w-10 h-10 rounded-sm border hover:border-gray-800 text-sm ${
+                    chosenSize == "S" ? "border-gray-800" : " "
+                  }`}
+                  onClick={() => setChosenSize("S")}
+                >
+                  S
+                </button>
+                <button
+                  className={`w-10 h-10 rounded-sm border hover:border-gray-800 text-sm ${
+                    chosenSize == "M" ? "border-gray-800" : " "
+                  }`}
+                  onClick={() => setChosenSize("M")}
+                >
+                  M
+                </button>
+                <button
+                  className={`w-10 h-10 rounded-sm border hover:border-gray-800 text-sm ${
+                    chosenSize == "L" ? "border-gray-800" : " "
+                  }`}
+                  onClick={() => setChosenSize("L")}
+                >
+                  L
+                </button>
+                <button
+                  className={`w-10 h-10 rounded-sm  border hover:border-gray-800 text-sm ${
+                    chosenSize == "XL" ? "border-gray-800" : " "
+                  }`}
+                  onClick={() => setChosenSize("XL")}
+                >
+                  XL
+                </button>
+              </div>
+
+              <h3 className="text-sm montserrat-bold mt-5 mb-3">Quantity</h3>
+              <div className="flex">
+                <button
+                  onClick={() =>
+                    setChosenQuantity((prevValue) => {
+                      if (prevValue > 1) {
+                        return prevValue - 1;
+                      } else {
+                        return prevValue;
+                      }
+                    })
+                  }
+                >
+                  <img
+                    src="/src/assets/minus-icon.svg"
+                    alt=""
+                    className="h-10 w-10 border hover:border-gray-800"
+                  />
+                </button>
+                <h3 className=" flex h-10 w-10 items-center justify-center border  mx-3">
+                  {chosenQuantity}
+                </h3>
+                <button
+                  onClick={() =>
+                    setChosenQuantity((prevValue) => {
+                      return prevValue + 1;
+                    })
+                  }
+                >
+                  <img
+                    src="/src/assets/plus-icon.svg"
+                    alt=""
+                    className="h-10 w-10 border hover:border-gray-800"
+                  />
+                </button>
+              </div>
+
+              <div ref={buyButtonRef}>
+                <button
+                  className=" w-full h-14 my-10 bg-white text-base border border-gray-800 rounded-sm hover:invert  "
+                  onMouseEnter={handleSizeNotChosenEnter}
+                  onMouseLeave={handleSizeNotChosenLeave}
+                  onClick={handleAddToCart}
+                >
+                  {cartButtonValue}
+                </button>
+              </div>
+
+              <p className=" text-sm/[25px] ">{currentProduct?.description}</p>
+              <GeneralInfoAccordions />
+            </div>
           </div>
         </div>
-        <div className="md:pl-10 lg:mr-[15%]">
-          <div className="montserrat-regular">
-            <h1 className=" text-2xl ">{currentProduct?.name}</h1>
-            <h2 className=" text-xl my-1">€{currentProduct?.price}</h2>
-            <span className=" block h-px bg-gray-400 my-5  "></span>
-            <h3 className="text-sm montserrat-bold">Size</h3>
-            <div className=" flex flex-wrap gap-2 my-3">
-              <button
-                className={`w-10 h-10 rounded-sm border hover:border-gray-800 text-sm ${
-                  chosenSize == "XS" ? "border-gray-800" : " "
-                }`}
-                onClick={() => setChosenSize("XS")}
-              >
-                XS
-              </button>
-              <button
-                className={`w-10 h-10 rounded-sm border hover:border-gray-800 text-sm ${
-                  chosenSize == "S" ? "border-gray-800" : " "
-                }`}
-                onClick={() => setChosenSize("S")}
-              >
-                S
-              </button>
-              <button
-                className={`w-10 h-10 rounded-sm border hover:border-gray-800 text-sm ${
-                  chosenSize == "M" ? "border-gray-800" : " "
-                }`}
-                onClick={() => setChosenSize("M")}
-              >
-                M
-              </button>
-              <button
-                className={`w-10 h-10 rounded-sm border hover:border-gray-800 text-sm ${
-                  chosenSize == "L" ? "border-gray-800" : " "
-                }`}
-                onClick={() => setChosenSize("L")}
-              >
-                L
-              </button>
-              <button
-                className={`w-10 h-10 rounded-sm  border hover:border-gray-800 text-sm ${
-                  chosenSize == "XL" ? "border-gray-800" : " "
-                }`}
-                onClick={() => setChosenSize("XL")}
-              >
-                XL
-              </button>
+        {buyIsVisible ? (
+          ""
+        ) : (
+          <div className=" md:hidden montserrat-regular fixed bottom-0 px-9 border-t w-screen py-3  bg-white">
+            <div className="flex justify-between my-3">
+              <p>
+                {currentProduct?.name}
+                {chosenSize ? ` ${chosenSize}` : ""}
+                {chosenQuantity > 1 ? ` (${chosenQuantity})` : ""}
+              </p>
+              <p>{currentProduct?.price} €</p>
             </div>
 
-            <h3 className="text-sm montserrat-bold mt-5 mb-3">Quantity</h3>
-            <div className="flex">
-              <button
-                onClick={() =>
-                  setChosenQuantity((prevValue) => {
-                    if (prevValue > 1) {
-                      return prevValue - 1;
-                    } else {
-                      return prevValue;
-                    }
-                  })
-                }
-              >
-                <img
-                  src="/src/assets/minus-icon.svg"
-                  alt=""
-                  className="h-10 w-10 border hover:border-gray-800"
-                />
-              </button>
-              <h3 className=" flex h-10 w-10 items-center justify-center border  mx-3">
-                {chosenQuantity}
-              </h3>
-              <button
-                onClick={() =>
-                  setChosenQuantity((prevValue) => {
-                    return prevValue + 1;
-                  })
-                }
-              >
-                <img
-                  src="/src/assets/plus-icon.svg"
-                  alt=""
-                  className="h-10 w-10 border hover:border-gray-800"
-                />
-              </button>
-            </div>
-
-            <div ref={buyButtonRef}>
-              <button
-                className=" w-full h-14 my-10 bg-white text-base border border-gray-800 rounded-sm hover:invert  "
-                onMouseEnter={handleSizeNotChosenEnter}
-                onMouseLeave={handleSizeNotChosenLeave}
-                onClick={handleAddToCart}
-              >
-                {cartButtonValue}
-              </button>
-            </div>
-
-            <p className=" text-sm/[25px] ">{currentProduct?.description}</p>
-            <GeneralInfoAccordions />
+            <button
+              className=" w-full h-14   bg-white text-base border border-gray-800 rounded-sm hover:invert   "
+              onMouseEnter={handleSizeNotChosenEnter}
+              onMouseLeave={handleSizeNotChosenLeave}
+              onClick={handleAddToCart}
+            >
+              {cartButtonValue}
+            </button>
           </div>
-        </div>
+        )}
+        <Footer />
       </div>
-      {buyIsVisible ? (
-        ""
-      ) : (
-        <div className=" md:hidden montserrat-regular fixed bottom-0 px-9 border-t w-screen py-3  bg-white">
-          <div className="flex justify-between my-3">
-            <p>
-              {currentProduct?.name}
-              {chosenSize ? ` ${chosenSize}` : ""}
-              {chosenQuantity > 1 ? ` (${chosenQuantity})` : ""}
-            </p>
-            <p>{currentProduct?.price} €</p>
-          </div>
-
-          <button
-            className=" w-full h-14   bg-white text-base border border-gray-800 rounded-sm hover:invert   "
-            onMouseEnter={handleSizeNotChosenEnter}
-            onMouseLeave={handleSizeNotChosenLeave}
-            onClick={handleAddToCart}
-          >
-            {cartButtonValue}
-          </button>
-        </div>
-      )}
-      <Footer />
-    </div>
-  );
+    );
+  } else {
+    return (
+      <div>
+        <Error />
+      </div>
+    );
+  }
 };

@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import { Cart } from "./cart/cart";
 import { useSelector } from "react-redux";
 import { RootState } from "../../features/rootReducer";
+import { auth } from "../../firebase";
 
 type navbarProps = {
   solidBg: boolean;
@@ -22,6 +23,7 @@ export const Navbar: React.FC<navbarProps> = ({
   const [searchBarActive, setSearchBarActive] = useState<boolean>(false);
   const [sideMenuActive, setSideMenuActive] = useState<boolean>(false);
   const [cartActive, setCartActive] = useState<boolean>(false);
+  const [userLoggedIn, setUserLoggedIn] = useState<boolean>(false);
   let hoverTimeout = useRef<number | null>(null);
 
   const cartProducts = useSelector((state: RootState) => state.cart);
@@ -77,6 +79,17 @@ export const Navbar: React.FC<navbarProps> = ({
         window.removeEventListener("scroll", handleScroll);
       };
     }
+
+    //checks if user is logged in
+    const unsubscribe = auth.onAuthStateChanged((user) => {
+      if (user) {
+        setUserLoggedIn(true);
+      } else {
+        setUserLoggedIn(false);
+      }
+    });
+
+    return () => unsubscribe();
   }, []);
 
   return (
@@ -157,7 +170,7 @@ export const Navbar: React.FC<navbarProps> = ({
           </Link>
         </div>
         <div className="flex flex-1 justify-end my-auto mr-10 max-md:mr-5 ">
-          <Link to="/login">
+          <Link to={`${userLoggedIn ? "/account" : "/login"}`}>
             <img
               src="/src/assets/account-icon.svg"
               alt=""
@@ -184,7 +197,10 @@ export const Navbar: React.FC<navbarProps> = ({
             )}
           </div>
 
-          <Link to="/login" className={`group mr-5  my-auto max-md:hidden `}>
+          <Link
+            to={`${userLoggedIn ? "/account" : "/login"}`}
+            className={`group mr-5  my-auto max-md:hidden `}
+          >
             Account
             <span
               className={`block h-0.5 ${

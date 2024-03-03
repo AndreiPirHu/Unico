@@ -6,6 +6,7 @@ import { ProductList } from "../../components/productList";
 import { Navbar } from "../../components/navbar/navbar";
 import { Footer } from "../../components/footer/footer";
 import { SiteLoader } from "../../components/siteLoader";
+import { Error } from "../error/error";
 
 export const Collections = () => {
   const { pathname } = useLocation();
@@ -17,6 +18,7 @@ export const Collections = () => {
   const [title, setTitle] = useState<string>();
   const [productsAmount, setProductsAmount] = useState<number>();
   const [categoryDescription, setCategoryDescription] = useState<string>();
+  const [categoryExists, setCategoryExists] = useState<boolean>(true);
 
   const getDescription = (category: string) => {
     return {
@@ -57,30 +59,46 @@ export const Collections = () => {
     }
   }, [products, pathname]);
 
-  return (
-    <div>
-      <SiteLoader />
-      <Navbar solidBg={true} />
-      <div
-        id="information-container"
-        className=" grid justify-center mt-10 text-center montserrat-regular"
-      >
-        <div className="grid justify-center">
-          <h1 className="text-xl">{title}</h1>
-          <p className=" text-center text-sm max-w-[600px] mx-10 my-5">
-            {categoryDescription}
-          </p>
-        </div>
-        <div className="text-sm mt-5">
-          <h2>{productsAmount} products</h2>
-        </div>
-      </div>
+  useEffect(() => {
+    if (productsAmount && productsAmount > 0) {
+      setCategoryExists(true);
+    } else {
+      setCategoryExists(false);
+    }
+  }, [productsAmount]);
 
-      <div id="products-container" className=" mb-10">
-        <ProductList data={categoryProducts} />
-      </div>
+  if (categoryExists) {
+    return (
+      <div>
+        <SiteLoader />
+        <Navbar solidBg={true} />
+        <div
+          id="information-container"
+          className=" grid justify-center mt-10 text-center montserrat-regular"
+        >
+          <div className="grid justify-center">
+            <h1 className="text-xl">{title}</h1>
+            <p className=" text-center text-sm max-w-[600px] mx-10 my-5">
+              {categoryDescription}
+            </p>
+          </div>
+          <div className="text-sm mt-5">
+            <h2>{productsAmount} products</h2>
+          </div>
+        </div>
 
-      <Footer />
-    </div>
-  );
+        <div id="products-container" className=" mb-10">
+          <ProductList data={categoryProducts} />
+        </div>
+
+        <Footer />
+      </div>
+    );
+  } else {
+    return (
+      <div>
+        <Error />
+      </div>
+    );
+  }
 };
