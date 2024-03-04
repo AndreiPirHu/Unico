@@ -41,7 +41,7 @@ export const ProductImagesModal: React.FC<ProductImagesModalProps> = ({
         <img
           src={selectedImage}
           alt="picture of clothing product"
-          className={`max-h-[600px] origin-top-left    ${
+          className={`max-h-[600px] origin-top-left touch-manipulation   ${
             imageZoomed
               ? " cursor-zoom-out scale-[2.5] h-[800px] "
               : " cursor-zoom-in "
