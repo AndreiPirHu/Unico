@@ -13,7 +13,7 @@ export const ProductList: React.FC<productListProps> = ({ data }) => {
     for (let product of data) {
       let newItem: React.ReactNode = (
         <div key={product.name} className=" relative cursor-pointer ">
-          <Link to={`/products/${product.name}`}>
+          <Link to={`/products/${product.name.replace(/ /g, "-")}`}>
             <img
               src={product.images.front}
               alt=""

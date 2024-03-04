@@ -5,7 +5,7 @@ import { SiteLoader } from "../../components/siteLoader";
 export const Error = () => {
   return (
     <div>
-      <SiteLoader />
+      <SiteLoader duration={6000} />
       <Navbar solidBg={true} />
       <div className="montserrat-regular grid justify-center my-20 gap-10 text-center">
         <h1 className="text-base font-medium">404 Page not found</h1>

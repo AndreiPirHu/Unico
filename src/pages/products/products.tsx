@@ -1,4 +1,4 @@
-import { useLocation, useParams } from "react-router-dom";
+import { Link, useLocation, useParams } from "react-router-dom";
 import { Footer } from "../../components/footer/footer";
 import { Navbar } from "../../components/navbar/navbar";
 import { useDispatch, useSelector } from "react-redux";
@@ -31,9 +31,19 @@ export const Products = () => {
   const { pathname } = useLocation();
 
   const getCurrentProduct = () => {
-    setCurrentProduct(
-      products.products.find((product) => product.name == name)
-    );
+    if (name) {
+      //replaces all instances of hyphen (-) with space
+      let modifiedName = name.replace(/-/g, " ");
+
+      // Replace specific phrases that contain hyphens!
+      modifiedName = modifiedName.replace(/\bT shirt\b/g, "T-shirt");
+      modifiedName = modifiedName.replace(/\bButton up\b/g, "Button-up");
+
+      //find the correct product
+      setCurrentProduct(
+        products.products.find((product) => product.name == modifiedName)
+      );
+    }
   };
 
   let hoverTimeout = useRef<number | null>(null);
@@ -168,12 +178,30 @@ export const Products = () => {
           productAdded={productAdded}
           setProductAdded={setProductAdded}
         />
-        <div className="grid grid-cols-2 my-16 px-9  max-md:grid-cols-1">
+        <div className="grid grid-cols-2 my-14 px-9  max-md:grid-cols-1 max-[540px]:mt-0 ">
+          <div
+            id="breadcrumbs"
+            className="flex text-xs pb-3 gap-1 max-md:hidden"
+          >
+            <Link to={"/collections/" + currentProduct?.type}>
+              <h1>{currentProduct?.type.toUpperCase()} </h1>
+            </Link>
+
+            <img
+              src="/src/assets/arrow-icon.svg"
+              alt="arrow icon"
+              className="w-2"
+            />
+            <Link to={"/products/" + currentProduct?.name}>
+              <h1>{currentProduct?.name.toUpperCase()}</h1>
+            </Link>
+          </div>
+          <div></div>
           <div className="grid justify-center">
             <img
               src={selectedImage}
               alt="picture of clothing product"
-              className=" max-h-[600px] cursor-pointer"
+              className=" min-[541px]:max-h-[600px] max-[540px]:max-w-[100vw] cursor-pointer"
               onClick={() => {
                 setProductImagesModalActive(true);
               }}
@@ -313,6 +341,7 @@ export const Products = () => {
   } else {
     return (
       <div>
+        <SiteLoader duration={5000} />
         <Error />
       </div>
     );

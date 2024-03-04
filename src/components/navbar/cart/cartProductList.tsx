@@ -66,7 +66,7 @@ export const CartProductList: React.FC<CartProductListProps> = ({
   };
 
   const handleQuickNavigateToProduct = (name: string) => {
-    navigate(`/products/${name}`);
+    navigate(`/products/${name.replace(/ /g, "-")}`);
   };
 
   const createProductNodeList = () => {

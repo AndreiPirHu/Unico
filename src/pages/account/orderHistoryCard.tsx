@@ -36,7 +36,7 @@ export const OrderHistoryCard: React.FC<OrderHistoryCardProps> = ({
   };
 
   const handleQuickNavigateToProduct = (name: string) => {
-    navigate(`/products/${name}`);
+    navigate(`/products/${name.replace(/ /g, "-")}`);
   };
 
   useEffect(() => {

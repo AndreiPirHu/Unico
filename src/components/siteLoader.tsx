@@ -1,16 +1,29 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 
-export const SiteLoader = () => {
+type SiteLoaderProps = {
+  duration?: number;
+};
+
+export const SiteLoader: React.FC<SiteLoaderProps> = ({ duration }) => {
   const [active, setActive] = useState<boolean>(true);
   const { pathname } = useLocation();
 
-  useEffect(() => {
-    setActive(true);
-    setTimeout(() => {
-      setActive(false);
-    }, 700);
-  }, []);
+  if (duration) {
+    useEffect(() => {
+      setActive(true);
+      setTimeout(() => {
+        setActive(false);
+      }, duration);
+    }, []);
+  } else {
+    useEffect(() => {
+      setActive(true);
+      setTimeout(() => {
+        setActive(false);
+      }, 700);
+    }, []);
+  }
 
   useEffect(() => {
     setActive(true);

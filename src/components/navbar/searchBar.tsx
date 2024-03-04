@@ -55,7 +55,7 @@ export const SearchBar: React.FC<searchBarProps> = ({
           let newProduct: React.ReactNode = (
             <div key={product.name} className=" relative cursor-pointer   ">
               <Link
-                to={`/products/${product.name}`}
+                to={`/products/${product.name.replace(/ /g, "-")}`}
                 className="grid justify-center"
               >
                 <img
