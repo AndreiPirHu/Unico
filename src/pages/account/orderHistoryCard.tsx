@@ -51,7 +51,7 @@ export const OrderHistoryCard: React.FC<OrderHistoryCardProps> = ({
       >
         <h2>Order summary</h2>
         <img
-          src="Unico/src/assets/arrow-icon.svg"
+          src="https://raw.githubusercontent.com/AndreiPirHu/Unico/main/src/assets/arrow-icon.svg"
           alt="arrow icon"
           className={`w-4 ml-3  transition-all duration-300 ${
             summaryExpanded ? "rotate-[270deg]" : "rotate-90"

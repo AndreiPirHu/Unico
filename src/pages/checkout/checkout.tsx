@@ -121,7 +121,7 @@ export const Checkout = () => {
         <div id="back-container" className="flex flex-1 my-auto ml-5 ">
           <div className="flex cursor-pointer" onClick={handleGoBack}>
             <img
-              src="Unico/src/assets/arrow-icon.svg"
+              src="https://raw.githubusercontent.com/AndreiPirHu/Unico/main/src/assets/arrow-icon.svg"
               alt="Arrow icon"
               className="h-5 rotate-180 pb-1 "
             />
@@ -133,7 +133,10 @@ export const Checkout = () => {
           className=" flex flex-1 h-20 justify-center py-3"
         >
           <Link to="/">
-            <img src="Unico/src/assets/logo-icon.svg" alt="Unico icon" />
+            <img
+              src="https://raw.githubusercontent.com/AndreiPirHu/Unico/main/src/assets/logo-icon.svg"
+              alt="Unico icon"
+            />
           </Link>
         </div>
         <div className="flex-1"></div>
@@ -343,7 +346,7 @@ export const Checkout = () => {
                     </h2>
 
                     <img
-                      src="Unico/src/assets/logos/postnord-logo.svg"
+                      src="https://raw.githubusercontent.com/AndreiPirHu/Unico/main/src/assets/logos/postnord-logo.svg"
                       alt="Postnord logo"
                       className="w-[100px]"
                     />
@@ -382,7 +385,7 @@ export const Checkout = () => {
                     </h2>
 
                     <img
-                      src="Unico/src/assets/logos/dhl-logo.svg"
+                      src="https://raw.githubusercontent.com/AndreiPirHu/Unico/main/src/assets/logos/dhl-logo.svg"
                       alt="DHL logo"
                       className="w-[100px]  bg-yellow-300 p-[4px] "
                     />
@@ -429,7 +432,7 @@ export const Checkout = () => {
                     </h2>
 
                     <img
-                      src="Unico/src/assets/logos/instabox-logo.svg"
+                      src="https://raw.githubusercontent.com/AndreiPirHu/Unico/main/src/assets/logos/instabox-logo.svg"
                       alt="Instabox logo"
                       className="w-[100px]"
                     />
@@ -480,7 +483,7 @@ export const Checkout = () => {
                     </div>
                     <div className="flex my-3 mx-2">
                       <img
-                        src="Unico/src/assets/logos/swish-logo.svg"
+                        src="https://raw.githubusercontent.com/AndreiPirHu/Unico/main/src/assets/logos/swish-logo.svg"
                         alt="Swish logo"
                         className="w-[100px]"
                       />
@@ -523,7 +526,7 @@ export const Checkout = () => {
                     </div>
                     <div className="flex my-3 mx-2">
                       <img
-                        src="Unico/src/assets/card-icon.svg"
+                        src="https://raw.githubusercontent.com/AndreiPirHu/Unico/main/src/assets/card-icon.svg"
                         alt="Credit card icon"
                         className="w-[100px] px-8 py-4"
                       />

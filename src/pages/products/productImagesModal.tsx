@@ -29,7 +29,7 @@ export const ProductImagesModal: React.FC<ProductImagesModalProps> = ({
   return (
     <div className=" z-50 grid justify-center fixed h-screen w-screen bg-white py-10 ">
       <img
-        src="Unico/src/assets/close-icon.svg"
+        src="https://raw.githubusercontent.com/AndreiPirHu/Unico/main/src/assets/close-icon.svg"
         alt="X icon for closing"
         className="z-50 h-20 fixed right-0 p-3 cursor-pointer "
         onClick={() => setProductImagesModalActive(false)}

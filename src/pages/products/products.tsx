@@ -188,7 +188,7 @@ export const Products = () => {
             </Link>
 
             <img
-              src="Unico/src/assets/arrow-icon.svg"
+              src="https://raw.githubusercontent.com/AndreiPirHu/Unico/main/src/assets/arrow-icon.svg"
               alt="arrow icon"
               className="w-2"
             />
@@ -273,7 +273,7 @@ export const Products = () => {
                   }
                 >
                   <img
-                    src="Unico/src/assets/minus-icon.svg"
+                    src="https://raw.githubusercontent.com/AndreiPirHu/Unico/main/src/assets/minus-icon.svg"
                     alt=""
                     className="h-10 w-10 border hover:border-gray-800"
                   />
@@ -289,7 +289,7 @@ export const Products = () => {
                   }
                 >
                   <img
-                    src="Unico/src/assets/plus-icon.svg"
+                    src="https://raw.githubusercontent.com/AndreiPirHu/Unico/main/src/assets/plus-icon.svg"
                     alt=""
                     className="h-10 w-10 border hover:border-gray-800"
                   />

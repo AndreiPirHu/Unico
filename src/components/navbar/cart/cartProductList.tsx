@@ -118,13 +118,6 @@ export const CartProductList: React.FC<CartProductListProps> = ({
                       className="h-10 max-[500px]:h-8 bg-white  border border-gray-400 rounded-full p-1 hover:invert"
                     />
                   </button>
-                  <button className="h-10 max-[500px]:h-8 ">
-                    <img
-                      src="Unico/src/assets/heart-icon.svg"
-                      alt="heart-icon"
-                      className="h-10 max-[500px]:h-8 bg-white  border border-gray-400 rounded-full p-1 hover:invert "
-                    />
-                  </button>
                 </div>
               </div>
               <div className="flex justify-between pt-4">
@@ -141,7 +134,7 @@ export const CartProductList: React.FC<CartProductListProps> = ({
 
                   <button onClick={() => handleIncreaseAmount(key)}>
                     <img
-                      src="Unico/src/assets/plus-icon.svg"
+                      src="https://raw.githubusercontent.com/AndreiPirHu/Unico/main/src/assets/plus-icon.svg"
                       alt="plus icon"
                       className="h-6 border  hover:border-black"
                     />
