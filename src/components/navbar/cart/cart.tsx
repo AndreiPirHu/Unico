@@ -54,7 +54,7 @@ export const Cart: React.FC<cartProps> = ({ cartActive, setCartActive }) => {
       >
         <div className="flex border-b  h-14 flex-none">
           <img
-            src="/src/assets/close-icon.svg"
+            src="Unico/src/assets/close-icon.svg"
             alt=""
             className="p-2 h-14 cursor-pointer"
             onClick={() => setCartActive(false)}

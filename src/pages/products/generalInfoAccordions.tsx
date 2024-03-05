@@ -11,7 +11,7 @@ export const GeneralInfoAccordions = () => {
         onClick={() => setShippingIsToggled(!shippingIsToggled)}
       >
         <img
-          src="/src/assets/plane-icon.svg"
+          src="Unico/src/assets/plane-icon.svg"
           alt="Airplane icon"
           className=" h-6 p-1"
         />

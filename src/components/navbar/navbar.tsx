@@ -112,7 +112,7 @@ export const Navbar: React.FC<navbarProps> = ({
       >
         <div className=" flex flex-1  my-auto ml-10 max-md:ml-5">
           <img
-            src="/src/assets/hamburger-icon.svg"
+            src="Unico/src/assets/hamburger-icon.svg"
             alt="three black horizontal lines"
             className={` inline cursor-pointer h-11 p-2 md:hidden  ${
               scrollPosition || hovered ? "" : "invert "
@@ -120,7 +120,7 @@ export const Navbar: React.FC<navbarProps> = ({
             onClick={() => setSideMenuActive(!sideMenuActive)}
           />
           <img
-            src="/src/assets/search-icon.svg"
+            src="Unico/src/assets/search-icon.svg"
             alt=""
             className={` inline cursor-pointer h-11 p-2  md:hidden ${
               scrollPosition || hovered ? "" : "invert "
@@ -161,7 +161,7 @@ export const Navbar: React.FC<navbarProps> = ({
         <div className=" flex flex-1 justify-center my-auto">
           <Link to="/">
             <img
-              src="/src/assets/logo-icon.svg"
+              src="Unico/src/assets/logo-icon.svg"
               alt=""
               className={`  cursor-pointer h-10 ${
                 scrollPosition || hovered ? "" : "invert "
@@ -172,7 +172,7 @@ export const Navbar: React.FC<navbarProps> = ({
         <div className="flex flex-1 justify-end my-auto mr-10 max-md:mr-5 ">
           <Link to={`${userLoggedIn ? "/account" : "/login"}`}>
             <img
-              src="/src/assets/account-icon.svg"
+              src="Unico/src/assets/account-icon.svg"
               alt=""
               className={` inline cursor-pointer h-11 p-2  md:hidden ${
                 scrollPosition || hovered ? "" : "invert "
@@ -181,7 +181,7 @@ export const Navbar: React.FC<navbarProps> = ({
           </Link>
           <div className="relative">
             <img
-              src="/src/assets/basket-icon.svg"
+              src="Unico/src/assets/basket-icon.svg"
               alt="basket icon"
               onClick={() => setCartActive(true)}
               className={` inline cursor-pointer h-11 p-2 md:hidden ${
@@ -215,7 +215,7 @@ export const Navbar: React.FC<navbarProps> = ({
             <div className="mt-[3px] ">
               Search
               <img
-                src="/src/assets/search-icon.svg"
+                src="Unico/src/assets/search-icon.svg"
                 alt=""
                 className={` inline h-6 ml-1  ${
                   scrollPosition || hovered ? "" : "invert "
@@ -236,7 +236,7 @@ export const Navbar: React.FC<navbarProps> = ({
             <div className="mt-[3px] ">
               Cart
               <img
-                src="/src/assets/basket-icon.svg"
+                src="Unico/src/assets/basket-icon.svg"
                 alt=""
                 className={` inline h-6 ml-1  ${
                   scrollPosition || hovered ? "" : "invert"

@@ -27,7 +27,7 @@ export const SideMenu: React.FC<sideMenuProps> = ({
       >
         <div className="flex justify-end border-b  h-14">
           <img
-            src="/src/assets/close-icon.svg"
+            src="Unico/src/assets/close-icon.svg"
             alt=""
             className="p-2 h-14 cursor-pointer"
             onClick={() => setSideMenuActive(false)}
@@ -43,7 +43,7 @@ export const SideMenu: React.FC<sideMenuProps> = ({
               <div>Shop</div>
 
               <img
-                src="/src/assets/arrow-icon.svg"
+                src="Unico/src/assets/arrow-icon.svg"
                 alt=""
                 className={`h-5 transition-all duration-300 ${
                   shopExpanded ? "rotate-[270deg]" : "rotate-90 "

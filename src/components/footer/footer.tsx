@@ -38,13 +38,13 @@ export const Footer = () => {
         </p>
         <div className="flex">
           <div className=" h-7 w-7 mr-3 cursor-pointer hover:opacity-65">
-            <img src="/src/assets/socials-fb-icon.svg" alt="" />
+            <img src="Unico/src/assets/socials-fb-icon.svg" alt="" />
           </div>
           <div className=" h-7 w-7 mr-3 cursor-pointer hover:opacity-65">
-            <img src="/src/assets/socials-ig-icon.svg" alt="" />
+            <img src="Unico/src/assets/socials-ig-icon.svg" alt="" />
           </div>
           <div className=" h-7 w-7 mr-3 cursor-pointer hover:opacity-65">
-            <img src="/src/assets/socials-tt-icon.svg" alt="" />
+            <img src="Unico/src/assets/socials-tt-icon.svg" alt="" />
           </div>
         </div>
       </div>

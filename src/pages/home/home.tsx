@@ -18,7 +18,7 @@ export const Home = () => {
         <picture>
           <source
             media="(max-width:640px)"
-            srcSet="/src/assets/hero-image-small.webp"
+            srcSet="Unico/src/assets/hero-image-small.webp"
           />
           <source
             media="(min-width:641px)"
@@ -26,7 +26,7 @@ export const Home = () => {
             srcSet="https://www.yitai.la/cdn/shop/files/Frame_357.jpg?v=1651694659"
           />
           <img
-            src="/src/assets/hero-image.png"
+            src="Unico/src/assets/hero-image.png"
             alt=""
             className=" w-full max-md:h-screen max-md:object-cover max-sm:h-[100vh] object-top"
           />
@@ -45,14 +45,14 @@ export const Home = () => {
       <div className="flex max-h-[760px] mt-9 max-sm:max-h-[400px]">
         <div className=" flex-1 ">
           <img
-            src="/src/assets/home-promo-image.png"
+            src="Unico/src/assets/home-promo-image.png"
             alt=""
             className=" object-cover h-full w-full"
           />
         </div>
         <div className="flex-1 max-sm:hidden ">
           <img
-            src="/src/assets/home-promo-image-2.png"
+            src="Unico/src/assets/home-promo-image-2.png"
             alt=""
             className=" object-cover h-full w-full border-t "
           />
