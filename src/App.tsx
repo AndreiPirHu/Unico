@@ -19,7 +19,6 @@ import { Register } from "./pages/login/register";
 import { auth, db } from "./firebase";
 import { doc, getDoc, updateDoc } from "firebase/firestore";
 import { Error } from "./pages/error/error";
-import { SiteLoader } from "./components/siteLoader";
 
 function App() {
   const cartProducts = useSelector((state: RootState) => state.cart);
