@@ -113,7 +113,7 @@ export const CartProductList: React.FC<CartProductListProps> = ({
                     className="h-10 max-[500px]:h-8 "
                   >
                     <img
-                      src="Unico/src/assets/trash-icon.svg"
+                      src="https://raw.githubusercontent.com/AndreiPirHu/Unico/main/src/assets/trash-icon.svg"
                       alt="Trash icon"
                       className="h-10 max-[500px]:h-8 bg-white  border border-gray-400 rounded-full p-1 hover:invert"
                     />
@@ -124,7 +124,7 @@ export const CartProductList: React.FC<CartProductListProps> = ({
                 <div className="flex">
                   <button onClick={() => handleReduceAmount(key)}>
                     <img
-                      src="Unico/src/assets/minus-icon.svg"
+                      src="https://raw.githubusercontent.com/AndreiPirHu/Unico/main/src/assets/minus-icon.svg"
                       alt="minus icon"
                       className="h-6 border   hover:border-black"
                     />

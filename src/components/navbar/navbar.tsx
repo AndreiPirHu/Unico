@@ -106,7 +106,7 @@ export const Navbar: React.FC<navbarProps> = ({
       <div
         className={` flex h-24 z-40 fixed w-screen transition-colors duration-200  text-sm font-light whitespace-nowrap ${
           scrollPosition || hovered
-            ? "bg-white text-gray-600 border-b border-#e2e2e2"
+            ? "bg-white text-gray-950 border-b border-#e2e2e2"
             : "bg-transparent text-white"
         }  `}
       >
